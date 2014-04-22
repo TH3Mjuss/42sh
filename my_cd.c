@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:10:41 2014 Zackary Beaugelin
-** Last update Mon Apr  7 20:10:45 2014 Zackary Beaugelin
+** Last update Tue Apr 22 16:32:02 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -15,12 +15,12 @@ char	*my_find(char **env, int k, char *to_find)
   char	**directory;
   char	*dir_ret;
 
-  dir_ret = xmalloc(sizeof(char) * 4096);
   while (env[k])
     {
       if (my_strncmp(to_find, env[k], my_strlen(to_find)) == 0)
 	{
 	  directory = my_str_to_wordtab(env[k], '\n', 0, 0);
+	  dir_ret = xmalloc(sizeof(directory[0]);
 	  dir_ret = directory[0];
 	  return (dir_ret);
 	}
