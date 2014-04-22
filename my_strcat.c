@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:56 2014 Zackary Beaugelin
-** Last update Mon Apr  7 20:15:01 2014 Zackary Beaugelin
+** Last update Tue Apr 22 16:08:20 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
@@ -33,7 +33,7 @@ char	*my_strcat(char *str1, char *str2)
   i  = 0;
   k = my_strlen(str1);
   lenght = my_strlen(str2) + k;
-  ret = xmalloc(sizeof(char) * lenght);
+  ret = xmalloc(sizeof(char) * lenght + 1);
   while (i != k)
     {
       ret[i] = str1[i];
