@@ -5,7 +5,7 @@
 ## Login   <beauge_z@epitech.net>
 ##
 ## Started on  Mon Apr  7 20:08:22 2014 Zackary Beaugelin
-## Last update Mon Apr  7 20:18:11 2014 Zackary Beaugelin
+## Last update Tue May  6 15:47:18 2014 Gysc0
 ##
 
 NAME	=	42sh
@@ -13,29 +13,36 @@ NAME	=	42sh
 CC	=	gcc
 
 CFLAGS	+=	-W -Wall -Wextra -Werror
-CFLAGS	+=	-I. -g3
+CFLAGS	+=	-I./Headers/ -g3
 
 LDFLAGS	=
 
 RM	=	rm -rf
 
-SRCS	=	minishell.c \
-		my_built_in.c \
-		my_cd.c \
-		my_exec.c \
-		my_getnbr.c \
-		my_help.c \
-		my_putnbr.c \
-		my_putstr.c \
-		my_strcat.c \
-		my_strchr.c \
-		my_strcmp.c \
-		my_strcpy.c \
-		my_strncmp.c \
-		my_strncpy.c \
-		my_str_to_wordtab.c \
-		xmalloc.c \
-		xread.c
+SRCDIR	=	./Sources
+BIDIR	=	$(SRCDIR)/built_in
+BTDIR	=	$(SRCDIR)/btree
+FDIR	=	$(SRCDIR)/functions
+
+
+
+SRCS	=	$(SRCDIR)/minishell.c \
+		$(BIDIR)/my_built_in.c \
+		$(BIDIR)/my_cd.c \
+		$(SRCDIR)/my_exec.c \
+		$(FDIR)/my_getnbr.c \
+		$(BIDIR)/my_help.c \
+		$(FDIR)/my_putnbr.c \
+		$(FDIR)/my_putstr.c \
+		$(FDIR)/my_strcat.c \
+		$(FDIR)/my_strchr.c \
+		$(FDIR)/my_strcmp.c \
+		$(FDIR)/my_strcpy.c \
+		$(FDIR)/my_strncmp.c \
+		$(FDIR)/my_strncpy.c \
+		$(SRCDIR)/my_str_to_wordtab.c \
+		$(FDIR)/xmalloc.c \
+		$(FDIR)/xread.c
 
 OBJS	=	$(SRCS:.c=.o)
 
