@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Tue May  6 15:51:06 2014 Gysc0
+** Last update Tue May  6 16:56:40 2014 Gysc0
 */
 
 #include "my_sh.h"
@@ -18,7 +18,7 @@ void		my_prompt()
   static int	i = 1;
 
   my_putstr("[\e[4;31m", 1);
-  if (!my_putstr(my_find(g_env, 0, "USER=", bf), 1))
+  if (!my_putstr(my_find(g_env, 0, "USER="), 1))
     my_putstr("user", 1);
   my_putstr("@minishell2\e[24;96m ", 1);
   my_putnbr(i);
@@ -60,8 +60,9 @@ int	my_parser(char **wordtab, int i)
   else if (!my_strncmp(wordtab[0], "exit", 5))
     {
       g_test = 0;
+      my_putstr("exit\n", 1);
       if (!wordtab[1])
-	return (1);
+	return (0);
       else
 	return (my_getnbr(wordtab[1]));
     }

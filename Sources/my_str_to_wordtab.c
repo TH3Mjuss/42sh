@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:17:34 2014 Zackary Beaugelin
-** Last update Wed Apr 23 13:19:02 2014 Zackary Beaugelin
+** Last update Tue May  6 16:52:36 2014 Gysc0
 */
 
 #include "my_sh.h"
@@ -50,14 +50,15 @@ int	check_sep(char *str, int i, char sep)
   return (i);
 }
 
-char	**my_str_to_wordtab(char *str, char sep, int a, t_bfree *bf)
+char	**my_str_to_wordtab(char *str, char sep, int a)
 {
   int	i;
   int	b;
+  char	**tab;
 
   b = 0;
   i = check_sep(str, 0, sep);
-  bf->tab = xmalloc(sizeof(char *) * (my_countword(str, sep)));
+  tab = xmalloc(sizeof(char *) * (my_countword(str, sep)));
   while (str[i] != '\n' && str[i] != '\0')
     {
       if (str[i] == sep || str[i] == '\n')
@@ -67,11 +68,11 @@ char	**my_str_to_wordtab(char *str, char sep, int a, t_bfree *bf)
 	  a++;
 	  b = 0;
 	}
-      bf->tab[a] = xmalloc(sizeof(char) * (my_countchar(str + i, sep)));
+      tab[a] = xmalloc(sizeof(char) * (my_countchar(str + i, sep)));
       while (str[i] != sep && str[i] != '\n' && str[i])
-	bf->tab[a][b++] = str[i++];
-      bf->tab[a][b] = '\0';
+	tab[a][b++] = str[i++];
+      tab[a][b] = '\0';
     }
-  bf->tab[a + 1] = NULL;
-  return (bf->tab);
+  tab[a + 1] = NULL;
+  return (tab);
 }

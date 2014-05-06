@@ -5,12 +5,12 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:35 2014 Zackary Beaugelin
-** Last update Wed Apr 23 12:57:02 2014 Zackary Beaugelin
+** Last update Tue May  6 16:43:35 2014 Gysc0
 */
 
 #include "my_sh.h"
 
-void	my_env(char **cur_env, char **param, t_bfree *bf)
+void	my_env(char **cur_env, char **param)
 {
   int	k;
 
@@ -34,15 +34,15 @@ void	my_env(char **cur_env, char **param, t_bfree *bf)
 	   && param[2] == NULL)
     write (1, "\n", 1);
   else if (my_strcmp(param[1], "-u") == 0)
-    my_unsetenv(param[2], cur_env, bf);
+    my_unsetenv(param[2], cur_env);
 }
 
-char    *added_str(char *name, char *var, t_bfree *bf)
+char    *added_str(char *name, char *var)
 {
   char  *added;
 
-  added = my_strcat(name, "=", bf);
-  added = my_strcat(added, var, bf);
+  added = my_strcat(name, "=");
+  added = my_strcat(added, var);
   return (added);
 }
 
@@ -61,34 +61,36 @@ void	my_setenv_bis(int i, t_mysh *ms, char **cp_env, char **add_env)
     add_env[i] = cp_env[i];
 }
 
-char		**my_setenv(char **cp_env, char *name, char *var, t_bfree *bf)
+char		**my_setenv(char **cp_env, char *name, char *var)
 {
   int		lenght;
   int		i;
   t_mysh	ms;
+  char		**add_env;
 
   i = 0;
   lenght = 0;
   ms.name = name;
   ms.val = var;
-  ms.str_add = added_str(name, var, bf);
+  ms.str_add = added_str(name, var);
   while (cp_env[lenght] != NULL)
     lenght++;
-  bf->add_env = xmalloc((lenght + 2) * sizeof(char *));
+  add_env = xmalloc((lenght + 2) * sizeof(char *));
   while (i != lenght)
     {
-      my_setenv_bis(i, &ms, cp_env, bf->add_env);
+      my_setenv_bis(i, &ms, cp_env, add_env);
       i++;
     }
-  return (bf->add_env);
+  return (add_env);
 }
 
-char	**my_unsetenv(char *name, char **environ, t_bfree *bf)
+char	**my_unsetenv(char *name, char **environ)
 {
   char	**cpy_env;
   int	k;
   int	i;
   int	lenght;
+  char	**save_env;
 
   k = 0;
   i = 0;
@@ -98,15 +100,15 @@ char	**my_unsetenv(char *name, char **environ, t_bfree *bf)
     return (cpy_env);
   while (cpy_env[lenght] != NULL)
     lenght++;
-  bf->save_env = xmalloc((lenght - 1) * sizeof(char *));
+  save_env = xmalloc((lenght - 1) * sizeof(char *));
   while (cpy_env[k])
     if (my_strncmp(cpy_env[k], name, my_strlen(name)) == 0)
       k++;
     else
       {
-	bf->save_env[i] = cpy_env[k];
+	save_env[i] = cpy_env[k];
 	k++;
 	i++;
       }
-  return (bf->save_env);
+  return (save_env);
 }

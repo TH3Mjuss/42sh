@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Wed Apr 23 13:13:13 2014 Zackary Beaugelin
+** Last update Tue May  6 16:51:00 2014 Gysc0
 */
 
 
@@ -13,16 +13,16 @@
 
 int	g_check;
 
-void		my_exec(char **bin, char **param, char **env, t_bfree *bf)
+void		my_exec(char **bin, char **param, char **env, int k)
 {
   t_exec	e;
 
-  if (bin[bf->k + 1] == NULL)
-    e.path = my_strcat("\0", "./", bf);
+  if (bin[k + 1] == NULL)
+    e.path = my_strcat("\0", "./");
   else
-    e.path = my_strcat(bin[bf->k], "/", bf);
-  e.path = my_strcat(e.path, param[0],  bf);
-  if (access(e.path, X_OK) == -1 && !(bin[bf->k + 1]) && g_check)
+    e.path = my_strcat(bin[k], "/");
+  e.path = my_strcat(e.path, param[0]);
+  if (access(e.path, X_OK) == -1 && !(bin[k + 1]) && g_check)
     {
       my_putstr(param[0], 2);
       my_putstr(": command not found\n", 2);
@@ -41,17 +41,18 @@ void		my_exec(char **bin, char **param, char **env, t_bfree *bf)
     }
 }
 
-int	my_execve(char **param, char **env, t_bfree *bf)
+int	my_execve(char **param, char **env)
 {
   char	**bin;
+  int	k;
 
-  bf->k = 0;
-  bin = my_str_to_wordtab(my_find(env, 0, "PATH", bf), ':', 0, bf);
+  k = 0;
+  bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0);
   g_check = 1;
-  while (bin[bf->k])
+  while (bin[k])
     {
-      my_exec(bin, param, env, bf);
-      bf->k++;
+      my_exec(bin, param, env, k);
+      k++;
     }
   return (1);
 }

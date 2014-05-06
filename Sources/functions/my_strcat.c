@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:56 2014 Zackary Beaugelin
-** Last update Wed Apr 23 13:14:28 2014 Zackary Beaugelin
+** Last update Tue May  6 16:51:53 2014 Gysc0
 */
 
 #include "my_sh.h"
@@ -23,27 +23,28 @@ int	my_strlen(char *str)
   return (k);
 }
 
-char	*my_strcat(char *str1, char *str2, t_bfree *bf)
+char	*my_strcat(char *str1, char *str2)
 {
   int	i;
   int	k;
   int	lenght;
+  char	*ret;
 
   i  = 0;
   k = my_strlen(str1);
   lenght = my_strlen(str2) + k;
-  bf->ret = xmalloc(sizeof(char) * lenght + 1);
+  ret = xmalloc(sizeof(char) * lenght + 1);
   while (i != k)
     {
-      bf->ret[i] = str1[i];
+      ret[i] = str1[i];
       i += 1;
     }
   i = 0;
   while ((k + i) != lenght)
     {
-      bf->ret[k + i] = str2[i];
+      ret[k + i] = str2[i];
       i += 1;
     }
-  bf->ret[k + i] = '\0';
-  return (bf->ret);
+  ret[k + i] = '\0';
+  return (ret);
 }
