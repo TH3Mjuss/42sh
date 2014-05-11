@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Tue May  6 16:56:40 2014 Gysc0
+** Last update Sat May 10 19:34:36 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -29,9 +29,8 @@ void		my_prompt()
 void	init_minishell(int ac, char **av, char **cp_env)
 {
   g_env = cp_env;
-  if (ac != 1)
-    exit(write(2, "Just lauch it !\n", 16));
-  av = av;
+  if (ac != 1 || av[1])
+    exit(write(2, "Just launch it !\n", 17));
 }
 
 void    my_signal(int sig)
