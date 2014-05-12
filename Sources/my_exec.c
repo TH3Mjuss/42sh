@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Tue May  6 16:51:00 2014 Gysc0
+** Last update Mon May 12 11:02:23 2014 Zackary Beaugelin
 */
 
 
@@ -47,8 +47,14 @@ int	my_execve(char **param, char **env)
   int	k;
 
   k = 0;
-  bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0);
+  bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0, 0);
   g_check = 1;
+  if (!bin)
+    {
+      my_putstr(param[0], 2);
+      my_putstr(": command not found\n", 2);
+      return (1);
+    }
   while (bin[k])
     {
       my_exec(bin, param, env, k);

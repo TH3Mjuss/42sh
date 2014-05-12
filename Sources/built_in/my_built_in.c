@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:35 2014 Zackary Beaugelin
-** Last update Tue May  6 16:43:35 2014 Gysc0
+** Last update Mon May 12 11:04:14 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -15,7 +15,7 @@ void	my_env(char **cur_env, char **param)
   int	k;
 
   k = 0;
-  if (param[1] == NULL)
+  if (param[1] == NULL && cur_env)
     while (cur_env[k])
       {
 	my_putstr(cur_env[k], 1);
@@ -48,17 +48,23 @@ char    *added_str(char *name, char *var)
 
 void	my_setenv_bis(int i, t_mysh *ms, char **cp_env, char **add_env)
 {
-  if (my_strncmp(ms->name, cp_env[i], my_strlen(ms->name)) == 0)
-    add_env[i] = ms->str_add;
-  else if (cp_env[i + 1] == NULL)
-    {
+  if (*cp_env)
+    if (my_strncmp(ms->name, cp_env[i], my_strlen(ms->name)) == 0)
+      add_env[i] = ms->str_add;
+    else if (cp_env[i + 1] == NULL)
+      {
+	add_env[i] = cp_env[i];
+	i = i + 1;
+	add_env[i] = ms->str_add;
+	add_env[i + 1] = NULL;
+      }
+    else
       add_env[i] = cp_env[i];
-      i = i + 1;
+  else
+    {
       add_env[i] = ms->str_add;
       add_env[i + 1] = NULL;
     }
-  else
-    add_env[i] = cp_env[i];
 }
 
 char		**my_setenv(char **cp_env, char *name, char *var)
@@ -74,6 +80,8 @@ char		**my_setenv(char **cp_env, char *name, char *var)
   ms.val = var;
   ms.str_add = added_str(name, var);
   while (cp_env[lenght] != NULL)
+    lenght++;
+  if (!lenght)
     lenght++;
   add_env = xmalloc((lenght + 2) * sizeof(char *));
   while (i != lenght)
@@ -96,19 +104,15 @@ char	**my_unsetenv(char *name, char **environ)
   i = 0;
   lenght = 0;
   cpy_env = environ;
-  if (name == NULL || name[0] == '\0' || my_strchr(name, '=') != NULL)
+  if (!(*cpy_env) || !name || name[0] == '\0' || my_strchr(name, '='))
     return (cpy_env);
   while (cpy_env[lenght] != NULL)
     lenght++;
-  save_env = xmalloc((lenght - 1) * sizeof(char *));
+  save_env = xmalloc((lenght) * sizeof(char *));
   while (cpy_env[k])
     if (my_strncmp(cpy_env[k], name, my_strlen(name)) == 0)
       k++;
     else
-      {
-	save_env[i] = cpy_env[k];
-	k++;
-	i++;
-      }
+      save_env[i++] = cpy_env[k++];
   return (save_env);
 }

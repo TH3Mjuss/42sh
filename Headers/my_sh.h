@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Tue May  6 16:34:36 2014 Gysc0
+** Last update Mon May 12 10:43:11 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -43,7 +43,7 @@ int	my_putstr(char *str, int fd);
 int	my_strcmp(char *s1, char *s2);
 char	*my_strcpy(char *s1, char *s2);
 void	*xmalloc(int size);
-char	**my_str_to_wordtab(char *str, char sep, int a);
+char	**my_str_to_wordtab(char *str, char sep, int a, int b);
 int	my_strlen(char *str);
 int	my_getnbr(char *str);
 int	is_num(char l);

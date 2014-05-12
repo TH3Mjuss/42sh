@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sat May 10 19:34:36 2014 Zackary Beaugelin
+** Last update Sun May 11 19:28:45 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -87,9 +87,9 @@ int		main(int ac, char **av, char **env)
 	j = -1;
 	my_prompt();
 	xread(0, buffer, 4096);
-	pars = my_str_to_wordtab(buffer, ';', 0);
-	while (pars[++j])
-	  k = my_parser(my_str_to_wordtab(pars[j], ' ', 0), 1);
+	pars = my_str_to_wordtab(buffer, ';', 0, 0);
+	while (pars && pars[++j])
+	  k = my_parser(my_str_to_wordtab(pars[j], ' ', 0, 0), 1);
       }
   return (k);
 }

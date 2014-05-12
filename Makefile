@@ -5,7 +5,7 @@
 ## Login   <beauge_z@epitech.net>
 ##
 ## Started on  Mon Apr  7 20:08:22 2014 Zackary Beaugelin
-## Last update Sat May 10 20:23:06 2014 Zackary Beaugelin
+## Last update Mon May 12 10:42:56 2014 Zackary Beaugelin
 ##
 
 NAME	=	42sh
@@ -26,7 +26,7 @@ FDIR	=	$(SRCDIR)/functions
 
 
 
-SRCS	=	$(SRCDIR)/minishell.c \
+SRCS	=	$(SRCDIR)/main.c \
 		$(BIDIR)/my_built_in.c \
 		$(BIDIR)/my_cd.c \
 		$(SRCDIR)/my_exec.c \
