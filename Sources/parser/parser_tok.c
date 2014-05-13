@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 ** 
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Sun May 11 18:11:32 2014 Zackary Beaugelin
+** Last update Tue May 13 19:31:42 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -23,6 +23,7 @@ int	my_counttok(char *str)
         nb_cmd++;
       i++;
     }
+  return (i);
 }
 
 int	my_count_ctok(char *str)
@@ -36,7 +37,7 @@ int	my_count_ctok(char *str)
   return (c);
 }
 
-int     check_not_tok(char *str, int i)
+int	check_not_tok(char *str, int i)
 {
   if (!my_tk_chk(str + i) && str[i])
     while (!my_tk_chk(str + i))

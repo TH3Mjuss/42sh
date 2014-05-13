@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Tue May 13 20:17:21 2014 Zackary Beaugelin
+** Last update Tue May 13 20:02:21 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -74,10 +74,8 @@ int	my_parser(char **wordtab, int i)
 
 int		main(int ac, char **av, char **env)
 {
-  int	k;
-  int	j;
-  char	buffer[4096];
-  char	**pars;
+  int		k;
+  char		buffer[4096];
 
   init_minishell(ac, av, env);
   g_test = 1;
@@ -86,12 +84,9 @@ int		main(int ac, char **av, char **env)
       exit(-1);
     else
       {
-	j = -1;
 	my_prompt();
 	xread(0, buffer, 4096);
-	pars = my_str_to_wordtab(buffer, ';', 0, 0);
-	while (pars && pars[++j])
-	  k = my_parser(my_str_to_wordtab(pars[j], ' ', 0, 0), 1);
+	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0));
       }
   return (k);
 }

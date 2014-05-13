@@ -5,21 +5,19 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Wed May  7 16:23:42 2014 Zackary Beaugelin
-** Last update Sat May 10 20:01:09 2014 Zackary Beaugelin
+** Last update Tue May 13 20:13:50 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
 
-char	g_gtok[][] = {{"&&"}, {"&"}, {"||"}, {"|"}, {";"}, {"<<"}, {"<"},
-		      {">>"}, {">"}, {NULL}};
-
 int	my_tk_chk(char *str)
 {
   int	i;
+  char	*gtok[] = {"&&", "&", "||", "|", ";", "<<", "<", ">>", ">", NULL};
 
   i = -1;
-  while (g_gtok[++i])
-    if (!my_strcmp(str, g_gtok[i]))
+  while (gtok[++i])
+    if (!my_strncmp(str, gtok[i], my_strlen(gtok[i])))
       return (1);
   return (0);
 }
@@ -37,6 +35,7 @@ int	my_countcmd(char *str)
 	nb_cmd++;
       i++;
     }
+  return (i);
 }
 
 int	my_countc(char *str)

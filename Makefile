@@ -5,7 +5,7 @@
 ## Login   <beauge_z@epitech.net>
 ##
 ## Started on  Mon Apr  7 20:08:22 2014 Zackary Beaugelin
-## Last update Mon May 12 10:42:56 2014 Zackary Beaugelin
+## Last update Tue May 13 19:58:35 2014 Zackary Beaugelin
 ##
 
 NAME	=	42sh
@@ -23,12 +23,14 @@ SRCDIR	=	./Sources
 BIDIR	=	$(SRCDIR)/built_in
 BTDIR	=	$(SRCDIR)/btree
 FDIR	=	$(SRCDIR)/functions
-
+PDIR	=	$(SRCDIR)/parser
 
 
 SRCS	=	$(SRCDIR)/main.c \
 		$(BIDIR)/my_built_in.c \
 		$(BIDIR)/my_cd.c \
+		$(BIDIR)/my_echo.c \
+		$(BIDIR)/my_echo2.c \
 		$(SRCDIR)/my_exec.c \
 		$(FDIR)/my_getnbr.c \
 		$(BIDIR)/my_help.c \
@@ -42,6 +44,9 @@ SRCS	=	$(SRCDIR)/main.c \
 		$(FDIR)/my_strncpy.c \
 		$(SRCDIR)/my_str_to_wordtab.c \
 		$(FDIR)/xmalloc.c \
+		$(PDIR)/parser.c \
+		$(PDIR)/my_preparser.c \
+		$(PDIR)/parser_tok.c \
 		$(FDIR)/xread.c
 
 OBJS	=	$(SRCS:.c=.o)
