@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Sun May 18 17:32:33 2014 Zackary Beaugelin
-** Last update Sun May 18 17:55:08 2014 Zackary Beaugelin
+** Last update Sun May 18 18:59:54 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -31,31 +31,31 @@ char	*my_revstr(char *s)
   return (p);
 }
 
-char	*my_setop(char *pwd, char *point)
+char	*my_setop(char *pwd, const char *point)
 {
   int	i;
-  char	*ret;
 
   i = 0;
-  (const char *)point;
-  while (my_strncmp(point, "..", 2))
+  while (!my_strncmp((char *)point, "..", 2))
     {
       point = point + 2;
       if (*point == '/')
 	point++;
       i++;
     }
-  ret = my_revstr(pwd);
-  if (ret[0] == '/')
-    ret++;
-  while (i > 0 && *ret)
+  my_revstr(pwd);
+  while (i > 0 && *pwd)
     {
-      if (ret == '/')
+      if (*pwd == '/')
 	{
-	  ret++;
+	  pwd++;
 	  i--;
 	}
-      ret++;
+      pwd++;
     }
-  return (my_revstr(ret));
+  pwd--;
+  my_revstr(pwd);
+  if (*point)
+    pwd = my_strcat(pwd, my_strcat("/", (char *)point));
+  return (pwd);
 }

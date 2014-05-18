@@ -5,7 +5,11 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
+<<<<<<< HEAD
+** Last update Sun May 18 18:12:22 2014 lennuy_f
+=======
 ** Last update Sun May 18 16:16:02 2014 Zackary Beaugelin
+>>>>>>> 594346076992c1bc0d064c2eb1c84e70e71121a4
 */
 
 #ifndef __MY_SH__
@@ -25,6 +29,7 @@ typedef struct	s_mysh
   char	*str_add;
   char	*name;
   char	*val;
+  int	test;
 }		t_mysh;
 
 typedef struct	s_exec
@@ -75,6 +80,7 @@ int	my_counttok(char *str);
 int	my_count_ctok(char *str);
 int	check_not_tok(char *str, int i);
 char	**tok_to_tab(char *str, int j, int k);
+char	*my_setop(char *pwd, const char *point);
 int	my_preparser(char **cmd, char **tok, char **env);
 int	my_parser(char **wordtab, int i, char **env);
 

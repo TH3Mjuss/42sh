@@ -5,7 +5,11 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:35 2014 Zackary Beaugelin
+<<<<<<< HEAD
+** Last update Sun May 18 17:18:38 2014 lennuy_f
+=======
 ** Last update Sun May 18 16:45:28 2014 Zackary Beaugelin
+>>>>>>> 594346076992c1bc0d064c2eb1c84e70e71121a4
 */
 
 #include "my_sh.h"
@@ -50,8 +54,11 @@ void	my_setenv_bis(int i, t_mysh *ms, char **cp_env, char **add_env)
 {
   if (*cp_env)
     if (my_strncmp(ms->name, cp_env[i], my_strlen(ms->name)) == 0)
-      add_env[i] = ms->str_add;
-    else if (cp_env[i + 1] == NULL)
+      {
+	add_env[i] = ms->str_add;
+	ms->test = 1;
+      }
+    else if (cp_env[i + 1] == NULL && ms->test == 0)
       {
 	add_env[i] = cp_env[i];
 	i = i + 1;
@@ -76,6 +83,7 @@ char		**my_setenv(char **cp_env, char *name, char *var)
 
   i = 0;
   lenght = 0;
+  ms.test = 0;
   ms.name = name;
   ms.val = var;
   ms.str_add = added_str(name, var);
