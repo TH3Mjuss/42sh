@@ -5,13 +5,25 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Wed May 14 16:06:13 2014 Zackary Beaugelin
+** Last update Sun May 18 16:03:01 2014 Zackary Beaugelin
 */
 
 
 #include "my_sh.h"
 
 int	g_check;
+
+void	my_exec_bis(t_exec *e, char *path, char **param, char **env)
+{
+  e->pid = fork();
+  if (e->pid < 0)
+    return ;
+  if (e->pid == 0)
+    execve(path, param, env);
+  else
+    waitpid(e->pid, &e->status, 0);
+  g_check = 0;
+}
 
 void		my_exec(char **bin, char **param, char **env, int k)
 {
@@ -29,27 +41,9 @@ void		my_exec(char **bin, char **param, char **env, int k)
       return ;
     }
   else if (!access(e.path, X_OK) && g_check)
-    {
-      e.pid = fork();
-      if (e.pid < 0)
-	return ;
-      if (e.pid == 0)
-	execve(e.path, param, env);
-      else
-	waitpid(e.pid, &e.status, 0);
-      g_check = 0;
-    }
+    my_exec_bis(&e, e.path, param, env);
   else if (!access(param[0], X_OK) && g_check)
-    {
-      e.pid = fork();
-      if (e.pid < 0)
-	return ;
-      if (e.pid == 0)
-	execve(param[0], param, env);
-      else
-	waitpid(e.pid, &e.status, 0);
-      g_check = 0;
-    }
+    my_exec_bis(&e, param[0], param, env);
 }
 
 int	my_execve(char **param, char **env)

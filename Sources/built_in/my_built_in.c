@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:35 2014 Zackary Beaugelin
-** Last update Mon May 12 11:04:14 2014 Zackary Beaugelin
+** Last update Sun May 18 16:45:28 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -14,25 +14,25 @@ void	my_env(char **cur_env, char **param)
 {
   int	k;
 
-  k = 0;
+  k = -1;
   if (param[1] == NULL && cur_env)
-    while (cur_env[k])
+    while (cur_env[++k])
       {
 	my_putstr(cur_env[k], 1);
 	write(1, "\n", 1);
-	k++;
       }
   else if (my_strcmp(param[1], "-0") == 0
 	   || my_strcmp(param[1], "--null") == 0)
-    while (cur_env[k])
-      {
-	my_putstr(cur_env[k], 1);
-	k++;
-      }
+    while (cur_env[++k])
+      my_putstr(cur_env[k], 1);
   else if ((my_strcmp(param[1], "-i") == 0
-	   || my_strcmp(param[1], "--ignore-environment") == 0)
-	   && param[2] == NULL)
-    write (1, "\n", 1);
+	   || my_strcmp(param[1], "--ignore-environment") == 0))
+    {
+      if (param[2])
+	my_parser(param + 2, 1, NULL);
+      else
+	write(1, "\n", 1);
+    }
   else if (my_strcmp(param[1], "-u") == 0)
     my_unsetenv(param[2], cur_env);
 }

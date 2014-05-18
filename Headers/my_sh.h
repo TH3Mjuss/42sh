@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Tue May 13 20:03:19 2014 Zackary Beaugelin
+** Last update Sun May 18 16:16:02 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -75,7 +75,7 @@ int	my_counttok(char *str);
 int	my_count_ctok(char *str);
 int	check_not_tok(char *str, int i);
 char	**tok_to_tab(char *str, int j, int k);
-int	my_preparser(char **cmd, char **tok);
-int	my_parser(char **wordtab, int i);
+int	my_preparser(char **cmd, char **tok, char **env);
+int	my_parser(char **wordtab, int i, char **env);
 
 #endif /*__MY_SH__*/
