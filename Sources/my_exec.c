@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Mon May 12 11:02:23 2014 Zackary Beaugelin
+** Last update Wed May 14 16:06:13 2014 Zackary Beaugelin
 */
 
 
@@ -35,6 +35,17 @@ void		my_exec(char **bin, char **param, char **env, int k)
 	return ;
       if (e.pid == 0)
 	execve(e.path, param, env);
+      else
+	waitpid(e.pid, &e.status, 0);
+      g_check = 0;
+    }
+  else if (!access(param[0], X_OK) && g_check)
+    {
+      e.pid = fork();
+      if (e.pid < 0)
+	return ;
+      if (e.pid == 0)
+	execve(param[0], param, env);
       else
 	waitpid(e.pid, &e.status, 0);
       g_check = 0;
