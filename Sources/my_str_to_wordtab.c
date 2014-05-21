@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:17:34 2014 Zackary Beaugelin
-** Last update Tue May  6 16:52:36 2014 Gysc0
+** Last update Mon May 12 10:44:16 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -17,7 +17,7 @@ int	my_countword(char *str, char sep)
 
   i = 0;
   m = 2;
-  while (str[i] != '\0' && str[i] != '\n')
+  while (str && str[i] != '\0' && str[i] != '\n')
     {
       if (str[i] == sep)
 	m++;
@@ -30,7 +30,7 @@ int	my_countchar(char *str, char sep)
   int	c;
 
   c = 0;
-  while (str[c] != sep && str[c] != '\0' && str[c] != '\n')
+  while (str && str[c] != sep && str[c] != '\0' && str[c] != '\n')
     c = c + 1;
   c = c + 1;
   return (c);
@@ -38,28 +38,29 @@ int	my_countchar(char *str, char sep)
 
 int	check_sep(char *str, int i, char sep)
 {
-  while (str[i] && str[i] != '=')
-    i++;
-  if (str[i] == '\0')
-    i = 0;
-  if (str[i] == '=')
-    i++;
-  if (str[i] == sep)
-    while (str[i] == sep)
-      i++;
+  if (str)
+    {
+      while (str[i] && str[i] != '=')
+	i++;
+      if (str[i] == '\0')
+	i = 0;
+      if (str[i] == '=')
+	i++;
+      if (str[i] == sep)
+	while (str[i] == sep)
+	  i++;
+    }
   return (i);
 }
 
-char	**my_str_to_wordtab(char *str, char sep, int a)
+char	**my_str_to_wordtab(char *str, char sep, int a, int b)
 {
   int	i;
-  int	b;
   char	**tab;
 
-  b = 0;
   i = check_sep(str, 0, sep);
   tab = xmalloc(sizeof(char *) * (my_countword(str, sep)));
-  while (str[i] != '\n' && str[i] != '\0')
+  while (str && str[i] != '\n' && str[i] != '\0')
     {
       if (str[i] == sep || str[i] == '\n')
 	{
@@ -73,6 +74,8 @@ char	**my_str_to_wordtab(char *str, char sep, int a)
 	tab[a][b++] = str[i++];
       tab[a][b] = '\0';
     }
+  if (!str)
+    return (NULL);
   tab[a + 1] = NULL;
   return (tab);
 }

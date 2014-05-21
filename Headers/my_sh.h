@@ -5,7 +5,11 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Tue May  6 16:34:36 2014 Gysc0
+<<<<<<< HEAD
+** Last update Sun May 18 18:12:22 2014 lennuy_f
+=======
+** Last update Sun May 18 16:16:02 2014 Zackary Beaugelin
+>>>>>>> 594346076992c1bc0d064c2eb1c84e70e71121a4
 */
 
 #ifndef __MY_SH__
@@ -25,6 +29,7 @@ typedef struct	s_mysh
   char	*str_add;
   char	*name;
   char	*val;
+  int	test;
 }		t_mysh;
 
 typedef struct	s_exec
@@ -43,7 +48,7 @@ int	my_putstr(char *str, int fd);
 int	my_strcmp(char *s1, char *s2);
 char	*my_strcpy(char *s1, char *s2);
 void	*xmalloc(int size);
-char	**my_str_to_wordtab(char *str, char sep, int a);
+char	**my_str_to_wordtab(char *str, char sep, int a, int b);
 int	my_strlen(char *str);
 int	my_getnbr(char *str);
 int	is_num(char l);
@@ -59,5 +64,24 @@ void	my_signal(int sig);
 char	**my_setenv(char **cp_env, char *name, char *var);
 char	**my_unsetenv(char *name, char **environ);
 void	xread(int fd, char *str, int lenght);
+void	my_echo(char **tab);
+char	*inittab();
+int	testopt(char **tab, int x);
+int	checkslash(char *tab, char *tab2, char *str, int i);
+int	eoption(char *str);
+int	checkopt(char **tab, int y, int x);
+char	*inittab2();
+char	**cmd_to_tab(char *str, int j, int k);
+int	check_tok(char *str, int i);
+int	my_countc(char *str);
+int	my_countcmd(char *str);
+int	my_tk_chk(char *str);
+int	my_counttok(char *str);
+int	my_count_ctok(char *str);
+int	check_not_tok(char *str, int i);
+char	**tok_to_tab(char *str, int j, int k);
+char	*my_setop(char *pwd, const char *point);
+int	my_preparser(char **cmd, char **tok, char **env);
+int	my_parser(char **wordtab, int i, char **env);
 
 #endif /*__MY_SH__*/

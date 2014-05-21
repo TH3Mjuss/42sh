@@ -5,13 +5,29 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
+<<<<<<< HEAD
 ** Last update Sun May 11 14:32:44 2014 jussea_m@epitech.eu
+=======
+** Last update Sun May 18 16:03:01 2014 Zackary Beaugelin
+>>>>>>> 8d4fb6a22add51f5118844b30a2ff28288a92e55
 */
 
 
 #include "my_sh.h"
 
 int	g_check;
+
+void	my_exec_bis(t_exec *e, char *path, char **param, char **env)
+{
+  e->pid = fork();
+  if (e->pid < 0)
+    return ;
+  if (e->pid == 0)
+    execve(path, param, env);
+  else
+    waitpid(e->pid, &e->status, 0);
+  g_check = 0;
+}
 
 void		my_exec(char **bin, char **param, char **env, int k)
 {
@@ -29,16 +45,9 @@ void		my_exec(char **bin, char **param, char **env, int k)
       return ;
     }
   else if (!access(e.path, X_OK) && g_check)
-    {
-      e.pid = fork();
-      if (e.pid < 0)
-	return ;
-      if (e.pid == 0)
-	execve(e.path, param, env);
-      else
-	waitpid(e.pid, &e.status, 0);
-      g_check = 0;
-    }
+    my_exec_bis(&e, e.path, param, env);
+  else if (!access(param[0], X_OK) && g_check)
+    my_exec_bis(&e, param[0], param, env);
 }
 
 int	my_execve(char **param, char **env)
@@ -47,8 +56,14 @@ int	my_execve(char **param, char **env)
   int	k;
 
   k = 0;
-  bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0);
+  bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0, 0);
   g_check = 1;
+  if (!bin)
+    {
+      my_putstr(param[0], 2);
+      my_putstr(": command not found\n", 2);
+      return (1);
+    }
   while (bin[k])
     {
       my_exec(bin, param, env, k);
