@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Fri May 23 17:06:11 2014 jussea_m@epitech.eu
+** Last update Fri May 23 17:46:17 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -82,7 +82,7 @@ int	left_redirection(char **param, char **param2, char **env)
 
   if (param2)
     {
-      if ((file = open(param2[0], O_RDONLY) == -1)
+      if ((file = open(param2[0], O_RDONLY)) == -1)
 	{
 	  my_putstr("Cant't use file\n", 2);
 	  return (1);
@@ -91,7 +91,7 @@ int	left_redirection(char **param, char **param2, char **env)
 	return (1);
       if (pid == 0)
 	{
-	  dup2(0, file);
+	  dup2(file, 0);
 	  my_parser(param, 1, env);
 	  exit(0);
 	}
