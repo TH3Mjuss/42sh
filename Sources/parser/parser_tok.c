@@ -1,11 +1,11 @@
 /*
 ** parser_tok.c for 42sh in /home/gysc0/rendu/my_42/Sources/parser
-** 
+**
 ** Made by Zackary Beaugelin
 ** Login   <beauge_z@epitech.net>
-** 
+**
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Tue May 13 19:31:42 2014 Zackary Beaugelin
+** Last update Fri May 23 14:03:26 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -39,9 +39,8 @@ int	my_count_ctok(char *str)
 
 int	check_not_tok(char *str, int i)
 {
-  if (!my_tk_chk(str + i) && str[i])
-    while (!my_tk_chk(str + i))
-      i++;
+  while (str[i] && !my_tk_chk(str + i))
+    i++;
   return (i);
 }
 
@@ -62,10 +61,10 @@ char	**tok_to_tab(char *str, int j, int k)
           k = 0;
         }
       tab[j] = xmalloc(sizeof(char) * (my_count_ctok(str + i)));
-      while (!my_tk_chk(str + i) && str[i] != '\n' && str[i])
+      while (my_tk_chk(str + i) && str[i] != '\n' && str[i])
 	tab[j][k++] = str[i++];
       tab[j][k] = '\0';
     }
-  tab[j + 1] = NULL;
+  tab[j] = NULL;
   return (tab);
 }

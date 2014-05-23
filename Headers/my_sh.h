@@ -5,11 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-<<<<<<< HEAD
-** Last update Sun May 18 18:12:22 2014 lennuy_f
-=======
-** Last update Sun May 18 16:16:02 2014 Zackary Beaugelin
->>>>>>> 594346076992c1bc0d064c2eb1c84e70e71121a4
+** Last update Wed May 21 18:32:05 2014 jussea_m@epitech.eu
 */
 
 #ifndef __MY_SH__
@@ -19,10 +15,11 @@
 #  include <sys/stat.h>
 #  include <sys/types.h>
 #  include <stdlib.h>
-#  include <unistd.h>
 #  include <sys/wait.h>
 #  include <errno.h>
 #  include <signal.h>
+#  include <fcntl.h>
+#  include <stdio.h>
 
 typedef struct	s_mysh
 {
@@ -83,5 +80,11 @@ char	**tok_to_tab(char *str, int j, int k);
 char	*my_setop(char *pwd, const char *point);
 int	my_preparser(char **cmd, char **tok, char **env);
 int	my_parser(char **wordtab, int i, char **env);
+int	right_redirection(char **param, char **param2, char **env);
+char	*my_epur_str(char *str);
+int	my_countword(char *str, char sep);
+int	my_countchar(char *str, char sep);
+int	check_sep(char *str, int i, char sep);
+char	**my_str_to_wordtab(char *str, char sep, int a, int b);
 
 #endif /*__MY_SH__*/

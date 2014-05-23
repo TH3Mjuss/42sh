@@ -5,13 +5,15 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:16:29 2014 Zackary Beaugelin
-** Last update Sat May 10 20:24:12 2014 Zackary Beaugelin
+** Last update Wed May 21 18:24:17 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
 
 int	my_strncmp(char *s1, char *s2, int n)
 {
+  if (!s1 || !s2)
+    return (-1);
   while (n > 0)
     {
       if (*s1 != *s2)

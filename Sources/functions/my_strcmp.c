@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:15:28 2014 Zackary Beaugelin
-** Last update Mon Apr  7 20:15:41 2014 Zackary Beaugelin
+** Last update Wed May 21 18:17:52 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -15,6 +15,8 @@ int	my_strcmp(char *s1, char *s2)
   int	i;
 
   i = 0;
+  if (!s1 || !s2)
+    return (-1);
   while (s1[i] != '\0')
     {
       if (s1[i] < s2[i])

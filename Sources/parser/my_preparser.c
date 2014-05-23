@@ -1,11 +1,11 @@
 /*
 ** my_preparser.c for 42sh in /home/gysc0/rendu/my_42
-** 
+**
 ** Made by Zackary Beaugelin
 ** Login   <beauge_z@epitech.net>
-** 
+**
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-** Last update Sun May 18 16:15:41 2014 Zackary Beaugelin
+** Last update Fri May 23 14:04:27 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -19,7 +19,7 @@ int	my_preparser(char **cmd, char **tok, char **env)
   j = 0;
   i = -1;
   ret = 0;
-  if (!tok)
+  if (!*tok)
     ret = my_parser(my_str_to_wordtab(cmd[0], ' ', 0, 0), 1, env);
   else
     while (tok[++i])
@@ -28,6 +28,12 @@ int	my_preparser(char **cmd, char **tok, char **env)
 	  ret = my_parser(my_str_to_wordtab(cmd[j], ' ', 0, 0), 1, env);
 	else if (!my_strcmp(tok[i], ";"))
 	  ret = my_parser(my_str_to_wordtab(cmd[j], ' ', 0, 0), 1, env);
+	else if (!my_strcmp(tok[i], ">"))
+	  {
+	    right_redirection(my_str_to_wordtab(my_epur_str(cmd[j]), ' ', 0, 0),
+			      my_str_to_wordtab(cmd[j + 1], ' ', 0, 0), env);
+	    j++;
+	  }
 	else
 	  {
 	    my_putstr(tok[i], 2);

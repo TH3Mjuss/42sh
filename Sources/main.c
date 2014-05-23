@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sun May 18 16:07:08 2014 Zackary Beaugelin
+** Last update Fri May 23 14:51:21 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -44,7 +44,7 @@ void    my_signal(int sig)
 
 int	my_parser(char **wordtab, int i, char **env)
 {
-  if (wordtab[0] == NULL)
+  if (!wordtab)
     return (i);
   else if (!my_strcmp(wordtab[0], "help"))
     i = my_help();
@@ -55,7 +55,7 @@ int	my_parser(char **wordtab, int i, char **env)
   else if (!my_strcmp(wordtab[0], "setenv"))
     g_env = my_setenv(env, wordtab[1], wordtab[2]);
   else if (!my_strcmp(wordtab[0], "unsetenv"))
-    g_env = my_unsetenv(wordtab[1], env);
+    g_env = my_unsetenv(wordtab[1], g_env);
   else if (!my_strcmp(wordtab[0], "echo"))
     my_echo(wordtab);
   else if (!my_strncmp(wordtab[0], "exit", 5))
@@ -68,16 +68,14 @@ int	my_parser(char **wordtab, int i, char **env)
 	return (my_getnbr(wordtab[1]));
     }
   else
-    i = my_execve(wordtab, env);
+    i = my_execve(wordtab, g_env);
   return (i);
 }
 
 int		main(int ac, char **av, char **env)
 {
-  int	k;
-  int	j;
-  char	buffer[4096];
-  char	**pars;
+  int		k;
+  char		buffer[4096];
 
   init_minishell(ac, av, env);
   g_test = 1;
@@ -86,12 +84,9 @@ int		main(int ac, char **av, char **env)
       exit(-1);
     else
       {
-	j = -1;
 	my_prompt();
 	xread(0, buffer, 4096);
-	pars = my_str_to_wordtab(buffer, ';', 0, 0);
-	while (pars && pars[++j])
-	  k = my_parser(my_str_to_wordtab(pars[j], ' ', 0, 0), 1, g_env);
+	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0), g_env);
       }
   return (k);
 }

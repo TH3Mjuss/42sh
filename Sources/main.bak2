@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Tue May 13 20:02:21 2014 Zackary Beaugelin
+** Last update Sun May 18 16:07:08 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -42,20 +42,20 @@ void    my_signal(int sig)
     }
 }
 
-int	my_parser(char **wordtab, int i)
+int	my_parser(char **wordtab, int i, char **env)
 {
   if (wordtab[0] == NULL)
     return (i);
   else if (!my_strcmp(wordtab[0], "help"))
     i = my_help();
   else if (!my_strcmp(wordtab[0], "cd"))
-    g_env = my_cd(wordtab, g_env);
+    g_env = my_cd(wordtab, env);
   else if (!my_strcmp(wordtab[0], "env"))
-    my_env(g_env, wordtab);
+    my_env(env, wordtab);
   else if (!my_strcmp(wordtab[0], "setenv"))
-    g_env = my_setenv(g_env, wordtab[1], wordtab[2]);
+    g_env = my_setenv(env, wordtab[1], wordtab[2]);
   else if (!my_strcmp(wordtab[0], "unsetenv"))
-    g_env = my_unsetenv(wordtab[1], g_env);
+    g_env = my_unsetenv(wordtab[1], env);
   else if (!my_strcmp(wordtab[0], "echo"))
     my_echo(wordtab);
   else if (!my_strncmp(wordtab[0], "exit", 5))
@@ -68,14 +68,16 @@ int	my_parser(char **wordtab, int i)
 	return (my_getnbr(wordtab[1]));
     }
   else
-    i = my_execve(wordtab, g_env);
+    i = my_execve(wordtab, env);
   return (i);
 }
 
 int		main(int ac, char **av, char **env)
 {
-  int		k;
-  char		buffer[4096];
+  int	k;
+  int	j;
+  char	buffer[4096];
+  char	**pars;
 
   init_minishell(ac, av, env);
   g_test = 1;
@@ -84,9 +86,12 @@ int		main(int ac, char **av, char **env)
       exit(-1);
     else
       {
+	j = -1;
 	my_prompt();
 	xread(0, buffer, 4096);
-	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0));
+	pars = my_str_to_wordtab(buffer, ';', 0, 0);
+	while (pars && pars[++j])
+	  k = my_parser(my_str_to_wordtab(pars[j], ' ', 0, 0), 1, g_env);
       }
   return (k);
 }
