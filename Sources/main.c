@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Fri May 23 14:51:21 2014 jussea_m@epitech.eu
+** Last update Fri May 23 17:03:18 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -72,10 +72,11 @@ int	my_parser(char **wordtab, int i, char **env)
   return (i);
 }
 
-int		main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-  int		k;
-  char		buffer[4096];
+  int	k;
+  int	i;
+  char	*buffer;
 
   init_minishell(ac, av, env);
   g_test = 1;
@@ -84,9 +85,14 @@ int		main(int ac, char **av, char **env)
       exit(-1);
     else
       {
+	i = -1;
 	my_prompt();
+	buffer = xmalloc(sizeof(char) * 4096);
+	while (++i <= 4096)
+	  buffer[i] = 0;
 	xread(0, buffer, 4096);
 	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0), g_env);
+	free(buffer);
       }
   return (k);
 }
