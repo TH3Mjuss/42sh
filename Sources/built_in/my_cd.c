@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:10:41 2014 Zackary Beaugelin
-** Last update Wed May 21 17:54:32 2014 lennuy_f
+** Last update Fri May 23 18:22:42 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -30,6 +30,28 @@ char	*my_find(char **env, int k, char *to_find)
   return (NULL);
 }
 
+char	**my_cd_tiray(char *dir, char **env)
+{
+  if (!(dir = my_find(env, 0, "OLDPWD")))
+    {
+      my_putstr("42sh: cd: OLDPWD not set", 2);
+      return (env);
+    }
+  chdir(dir);
+  env = my_setenv(env, "OLDPWD", my_find(env, 0, "PWD"));
+  env = my_setenv(env, "PWD", dir);
+  my_putstr(dir, 1);
+  my_putchar('\n');
+  return (env);
+}
+
+void	my_cd_error(char **param)
+{
+  my_putstr("my_sh: cd: ", 2);
+  my_putstr(param[1], 2);
+  my_putstr(": No such file or directory\n", 2);
+}
+
 char	**my_cd(char **param, char **env)
 {
   char  *dir;
@@ -45,27 +67,13 @@ char	**my_cd(char **param, char **env)
       env = my_setenv(env, "PWD", dir);
     }
   else if (my_strcmp(param[1], "-") == 0)
-    {
-      if (!(dir = my_find(env, 0, "OLDPWD")))
-	{
-	  my_putstr("42sh: cd: OLDPWD not set", 2);
-	  return (env);
-	}
-      chdir(dir);
-      env = my_setenv(env, "OLDPWD", my_find(env, 0, "PWD"));
-      env = my_setenv(env, "PWD", dir);
-    }
+    env = my_cd_tiray(dir, env);
   else if (chdir(param[1]) != -1)
     {
       env = my_setenv(env, "OLDPWD", my_find(env, 0, "PWD"));
       env = my_setenv(env, "PWD", getcwd(buff, 4096));
     }
   else
-    {
-      my_putstr("my_sh: cd: ", 2);
-      my_putstr(param[1], 2);
-      my_putstr(": No such file or directory\n", 2);
-      return (env);
-    }
+    my_cd_error(param);
   return (env);
 }

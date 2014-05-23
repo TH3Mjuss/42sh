@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Fri May 23 17:03:18 2014 lennuy_f
+** Last update Fri May 23 18:37:27 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -61,11 +61,7 @@ int	my_parser(char **wordtab, int i, char **env)
   else if (!my_strncmp(wordtab[0], "exit", 5))
     {
       g_test = 0;
-      my_putstr("exit\n", 1);
-      if (!wordtab[1])
-	return (0);
-      else
-	return (my_getnbr(wordtab[1]));
+      i = my_exit(wordtab);
     }
   else
     i = my_execve(wordtab, g_env);
@@ -91,7 +87,8 @@ int	main(int ac, char **av, char **env)
 	while (++i <= 4096)
 	  buffer[i] = 0;
 	xread(0, buffer, 4096);
-	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0), g_env);
+	k = my_preparser(cmd_to_tab(buffer, 0, 0),
+			 tok_to_tab(buffer, 0, 0), g_env);
 	free(buffer);
       }
   return (k);

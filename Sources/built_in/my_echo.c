@@ -5,7 +5,7 @@
 ** Login   <sanche_c@epitech.net>
 ** 
 ** Started on  Tue May  6 15:31:46 2014 Cedric Sanchez
-** Last update Sun May 11 19:17:05 2014 Cedric Sanchez
+** Last update Fri May 23 18:46:27 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -28,7 +28,6 @@ char	*inittab()
   tab[10] = '\0';
   return (tab);
 }
-
 
 void	my_echo(char **tab)
 {
@@ -70,7 +69,6 @@ int	testopt(char **tab, int x)
   else
     return (0);
 }
-
 
 int	checkslash(char *tab, char *tab2, char *str, int i)
 {

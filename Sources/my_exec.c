@@ -5,13 +5,8 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-<<<<<<< HEAD
-** Last update Sun May 11 14:32:44 2014 jussea_m@epitech.eu
-=======
-** Last update Sun May 18 16:03:01 2014 Zackary Beaugelin
->>>>>>> 8d4fb6a22add51f5118844b30a2ff28288a92e55
+** Last update Fri May 23 18:38:38 2014 lennuy_f
 */
-
 
 #include "my_sh.h"
 
