@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Fri May 23 14:03:26 2014 jussea_m@epitech.eu
+** Last update Fri May 23 20:02:14 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -55,7 +55,7 @@ char	**tok_to_tab(char *str, int j, int k)
     {
       if (!my_tk_chk(str + i) || str[i] == '\n')
         {
-	  while (!my_tk_chk(str + i))
+	  while (str[i] && !my_tk_chk(str + i))
             i++;
           j++;
           k = 0;

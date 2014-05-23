@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Fri May 23 18:36:07 2014 lennuy_f
+** Last update Fri May 23 19:44:13 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -35,6 +35,19 @@ typedef struct	s_exec
   pid_t	pid;
   int	status;
 }		t_exec;
+
+typedef struct	s_parse
+{
+  int	i;
+  int	j;
+}		t_parse;
+
+typedef struct	s_redir
+{
+  int		file;
+  int		pid;
+  int		status;
+}		t_redir;
 
 int	main(int ac, char **av, char **env);
 int	my_execve(char **param, char **env);
@@ -80,14 +93,14 @@ char	**tok_to_tab(char *str, int j, int k);
 char	*my_setop(char *pwd, const char *point);
 int	my_preparser(char **cmd, char **tok, char **env);
 int	my_parser(char **wordtab, int i, char **env);
-int	right_redirection(char **param, char **param2, char **env);
+int	my_rr(char **param, char **param2, char **env);
 char	*my_epur_str(char *str);
 int	my_countword(char *str, char sep);
 int	my_countchar(char *str, char sep);
 int	check_sep(char *str, int i, char sep);
 char	**my_str_to_wordtab(char *str, char sep, int a, int b);
-int     double_right_redirection(char **param, char **param2, char **env);
-int     left_redirection(char **param, char **param2, char **env);
+int     my_drr(char **param, char **param2, char **env);
+int     my_lr(char **param, char **param2, char **env);
 int	my_exit(char **wordtab);
 
 #endif /*__MY_SH__*/
