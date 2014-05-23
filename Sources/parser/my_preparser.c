@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-** Last update Fri May 23 14:04:27 2014 jussea_m@epitech.eu
+** Last update Fri May 23 17:14:41 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -34,12 +34,25 @@ int	my_preparser(char **cmd, char **tok, char **env)
 			      my_str_to_wordtab(cmd[j + 1], ' ', 0, 0), env);
 	    j++;
 	  }
-	else
+	else if (!my_strcmp(tok[i], ">>"))
 	  {
-	    my_putstr(tok[i], 2);
-	    my_putstr(": token not yet supported\n", 2);
+	    double_right_redirection(my_str_to_wordtab(my_epur_str(cmd[j]), ' ', 0, 0),
+				     my_str_to_wordtab(cmd[j + 1], ' ', 0, 0), env);
+	    j++;
 	  }
-	j++;
+	else if (!my_strcmp(tok[i], "<")
+	  {
+	    left_redirection(my_str_to_wordtab(my_epur_str(cmd[j]), ' ', 0, 0),
+			     my_str_to_wordtab(cmd[j + 1], ' ', 0, 0), env);
+            j++;
+	  }
+	  else
+	    {
+	      my_putstr(tok[i], 2);
+	      my_putstr(": token not yet supported\n", 2);
+	    }
+	  j++;
+	  }
       }
   return (ret);
 }

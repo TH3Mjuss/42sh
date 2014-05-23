@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Wed May 21 18:32:05 2014 jussea_m@epitech.eu
+** Last update Fri May 23 17:15:42 2014 jussea_m@epitech.eu
 */
 
 #ifndef __MY_SH__
@@ -86,5 +86,7 @@ int	my_countword(char *str, char sep);
 int	my_countchar(char *str, char sep);
 int	check_sep(char *str, int i, char sep);
 char	**my_str_to_wordtab(char *str, char sep, int a, int b);
+int     double_right_redirection(char **param, char **param2, char **env);
+int     left_redirection(char **param, char **param2, char **env);
 
 #endif /*__MY_SH__*/
