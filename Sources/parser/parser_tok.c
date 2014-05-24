@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Fri May 23 20:02:14 2014 Zackary Beaugelin
+** Last update Sat May 24 22:03:06 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -31,7 +31,7 @@ int	my_count_ctok(char *str)
   int	c;
 
   c = 0;
-  while (!my_tk_chk(str + c) && str[c] && str[c] != '\n')
+  while (my_tk_chk(str + c) && str[c] && str[c] != '\n')
     c++;
   c++;
   return (c);
