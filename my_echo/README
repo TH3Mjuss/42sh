@@ -1,0 +1,2 @@
+Le fichier echo.h contient les prototypes des fonctions a mettre dans le .h du 42sh
+PENSEZ A VERIFIER QU'IL NE RESTE PAS DE TRACE DE MON ANCIEN ECHO DANS LE .h OU DANS LES BUILT_IN
