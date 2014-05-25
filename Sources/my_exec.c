@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Sat May 24 16:04:33 2014 Zackary Beaugelin
+** Last update Sun May 25 22:26:51 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -59,7 +59,7 @@ int	my_execve(char **param, char **env)
 	return (1);
       my_putstr(param[0], 2);
       my_putstr(": command not found\n", 2);
-      return (1);
+      return (-1);
     }
   while (bin[k])
     {
