@@ -5,7 +5,7 @@
 ## Login   <beauge_z@epitech.net>
 ##
 ## Started on  Mon Apr  7 20:08:22 2014 Zackary Beaugelin
-## Last update Sun May 25 00:50:41 2014 Zackary Beaugelin
+## Last update Sun May 25 21:25:17 2014 lennuy_f
 ##
 
 NAME	=	42sh
@@ -33,7 +33,6 @@ SRCS	=	$(SRCDIR)/main.c \
 		$(SRCDIR)/my_exec.c \
 		$(FDIR)/my_getnbr.c \
 		$(BIDIR)/my_help.c \
-		$(BIDIR)/my_setold_pwd.c \
 		$(BIDIR)/my_exit.c \
 		$(FDIR)/my_putnbr.c \
 		$(FDIR)/my_putstr.c \
