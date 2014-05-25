@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sun May 25 17:12:17 2014 Cedric Sanchez
+** Last update Sun May 25 17:43:14 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -30,6 +30,16 @@ void		my_prompt()
 
 void	init_minishell(int ac, char **av, char **cp_env)
 {
+  system("clear");
+  my_putstr("\e[36m", 1);
+  my_putstr("    _____                 _      _ _____ _   _\n", 1);
+  my_putstr("   |  _  |               | |    (_)  ___| | | |\n", 1);
+  my_putstr("   | | | |_   _  __ _  __| |_ __ _\\ `--.| |_| |\n", 1);
+  my_putstr("   | | | | | | |/ _` |/ _` | \'__| |`--. \\  _  |\n", 1);
+  my_putstr("   \\ \\/\' / |_| | (_| | (_| | |  | /\\__/ / | | |\n", 1);
+  my_putstr("    \\_/\\_\\\\__,_|\\__,_|\\__,_|_|  |_\\____/\\_| |_/\n", 1);
+  my_putstr("\e[0m", 1);
+  my_putstr("made by: beauge_z - jussea_m - lennuy_f - sanche_c\n\n", 1);
   g_env = cp_env;
   if (ac != 1 || av[1])
     exit(write(2, "Just launch it !\n", 17));
@@ -76,8 +86,6 @@ int	main(int ac, char **av, char **env)
   int	i;
   char	*buffer;
 
-  write(1, "\e[36m\nWELCOME TO QUADRISHELL\n", 30);
-  write(1, "\e[0m", 6);
   init_minishell(ac, av, env);
   g_test = 1;
   while (g_test == 1)
