@@ -5,7 +5,7 @@
 ** Login   <sanche_c@epitech.net>
 ** 
 ** Started on  Sat May 24 17:32:21 2014 Cedric Sanchez
-** Last update Sun May 25 13:28:52 2014 Cedric Sanchez
+** Last update Sun May 25 16:05:10 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
@@ -97,9 +97,7 @@ int	checkcmd(char **av, int x)
   while (av[x])
     {
       if (av[x][0] == '-' && av[x + 1][0] != '-' && av[x + 1] != NULL)
-	{
 	  checkopt(av, x);
-	}
       else  if (av[x][0] == '-' && av[x + 1] != NULL && av[x + 1][0] == '-')
 	x++;
       else if (av[x][0] == '-' && av[x + 1] == NULL)
