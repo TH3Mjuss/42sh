@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sun May 25 22:38:49 2014 Zackary Beaugelin
+** Last update Sun May 25 22:41:29 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -20,12 +20,12 @@ void		my_prompt()
 
   hostname[1023] = '\0';
   gethostname(hostname, 1023);
-  if (!my_putstr(getcwd(buff, 512), 1))
+  if (!my_putstr(my_find(g_env, 0, "USER="), 1))
     my_putstr("user", 1);
   my_putstr("@", 1);
   my_putstr(hostname, 1);
   my_putstr(" \e[32m", 1);
-  my_putstr(my_find(g_env, 0, "PWD="), 1);
+  my_putstr(getcwd(buff, 512), 1);
   my_putstr("\e[0m> ", 1);
 }
 
