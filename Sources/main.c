@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Fri May 23 18:37:27 2014 lennuy_f
+** Last update Sat May 24 19:57:16 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -15,15 +15,17 @@ int	g_test;
 
 void		my_prompt()
 {
-  static int	i = 1;
+  char	hostname[1024];
 
-  my_putstr("[\e[4;31m", 1);
+  hostname[1023] = '\0';
+  gethostname(hostname, 1023);
   if (!my_putstr(my_find(g_env, 0, "USER="), 1))
     my_putstr("user", 1);
-  my_putstr("@minishell2\e[24;96m ", 1);
-  my_putnbr(i);
-  my_putstr("\e[0m]", 1);
-  i++;
+  my_putstr("@", 1);
+  my_putstr(hostname, 1);
+  my_putstr(" \e[32m", 1);
+  my_putstr(my_find(g_env, 0, "PWD="), 1);
+  my_putstr("\e[0m> ", 1);
 }
 
 void	init_minishell(int ac, char **av, char **cp_env)
@@ -84,12 +86,10 @@ int	main(int ac, char **av, char **env)
 	i = -1;
 	my_prompt();
 	buffer = xmalloc(sizeof(char) * 4096);
-	while (++i <= 4096)
+	while (++i < 4096)
 	  buffer[i] = 0;
 	xread(0, buffer, 4096);
-	k = my_preparser(cmd_to_tab(buffer, 0, 0),
-			 tok_to_tab(buffer, 0, 0), g_env);
-	free(buffer);
+	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0), g_env);
       }
   return (k);
 }

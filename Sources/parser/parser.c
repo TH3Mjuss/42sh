@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Wed May  7 16:23:42 2014 Zackary Beaugelin
-** Last update Wed May 21 17:05:01 2014 jussea_m@epitech.eu
+** Last update Sat May 24 22:00:39 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -43,7 +43,7 @@ int	my_countc(char *str)
   int	c;
 
   c = 0;
-  while (my_tk_chk(str + c) && str[c] && str[c] != '\n')
+  while (!my_tk_chk(str + c) && str[c] && str[c] != '\n')
     c++;
   c++;
   return (c);
@@ -51,8 +51,7 @@ int	my_countc(char *str)
 
 int	check_tok(char *str, int i)
 {
-  if (my_tk_chk(str + i) && str[i])
-    while (my_tk_chk(str + i))
+  while (str[i] && my_tk_chk(str + i))
       i++;
   return (i);
 }
@@ -61,9 +60,12 @@ char	**cmd_to_tab(char *str, int j, int k)
 {
   int	i;
   char	**tab;
+  int	c;
 
   i = check_tok(str, 0);
   tab = xmalloc(sizeof(char *) * my_countcmd(str));
+  if (!str || str[0] == '\n')
+    return (NULL);
   while (str[i] != '\n' && str[i])
     {
       if (my_tk_chk(str + i) || str[i] == '\n')
@@ -73,7 +75,7 @@ char	**cmd_to_tab(char *str, int j, int k)
 	  j++;
 	  k = 0;
 	}
-      tab[j] = xmalloc(sizeof(char) * (my_countc(str + i)));
+      tab[j] = xmalloc(sizeof(char) * (c = my_countc(str + i)));
       while (!my_tk_chk(str + i) && str[i] != '\n' && str[i])
         tab[j][k++] = str[i++];
       tab[j][k] = '\0';

@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Fri May 23 18:38:38 2014 lennuy_f
+** Last update Sat May 24 16:04:33 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -55,6 +55,8 @@ int	my_execve(char **param, char **env)
   g_check = 1;
   if (!bin)
     {
+      if (!param[0])
+	return (1);
       my_putstr(param[0], 2);
       my_putstr(": command not found\n", 2);
       return (1);

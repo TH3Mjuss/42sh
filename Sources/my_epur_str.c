@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Tue May 13 14:50:34 2014 jussea_m@epitech.eu
-** Last update Fri May 23 14:47:50 2014 jussea_m@epitech.eu
+** Last update Sun May 25 12:40:10 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -14,13 +14,10 @@ static void	check_for_tab(char *str)
 {
   int		i;
 
-  i = 0;
-  while (str[i])
-    {
-      if (str[i] == '\t')
-	str[i] = ' ';
-      i++;
-    }
+  i = -1;
+  while (str[++i])
+    if (str[i] == '\t')
+      str[i] = ' ';
 }
 
 static void	epur_area(char *str, int i)
@@ -40,7 +37,7 @@ char	*my_epur_str(char *str)
   int	i;
 
   i = 0;
-  if (str == NULL || !*str)
+  if (!str || !*str)
     return (NULL);
   check_for_tab(str);
   epur_area(str, i);

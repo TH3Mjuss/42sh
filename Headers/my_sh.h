@@ -5,7 +5,11 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Sat May 24 19:27:34 2014 jussea_m@epitech.eu
+<<<<<<< HEAD
+** Last update Sun May 25 16:08:30 2014 jussea_m@epitech.eu
+=======
+** Last update Sun May 25 00:48:02 2014 Zackary Beaugelin
+>>>>>>> 4405311b92607c9416d941b425e7949659f5b132
 */
 
 #ifndef __MY_SH__
@@ -74,13 +78,11 @@ void	my_signal(int sig);
 char	**my_setenv(char **cp_env, char *name, char *var);
 char	**my_unsetenv(char *name, char **environ);
 void	xread(int fd, char *str, int lenght);
-void	my_echo(char **tab);
-char	*inittab();
-int	testopt(char **tab, int x);
-int	checkslash(char *tab, char *tab2, char *str, int i);
-int	eoption(char *str);
-int	checkopt(char **tab, int y, int x);
-char	*inittab2();
+int	my_echo(char **tab);
+int	checkcmd(char **tab, int x);
+void	my_putstrecho(char *str, int check);
+void	checkopt(char **tab, int x);
+void	putspecchar(char c);
 char	**cmd_to_tab(char *str, int j, int k);
 int	check_tok(char *str, int i);
 int	my_countc(char *str);
@@ -102,6 +104,7 @@ char	**my_str_to_wordtab(char *str, char sep, int a, int b);
 int     my_drr(char **param, char **param2, char **env);
 int     my_lr(char **param, char **param2, char **env);
 int	my_exit(char **wordtab);
+void    prompt_dlr(t_redir *r, char *buff, char *stop);
 int     my_dlr(char **param, char **param2, char **env);
 
 #endif /*__MY_SH__*/

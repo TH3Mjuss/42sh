@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:10:41 2014 Zackary Beaugelin
-** Last update Fri May 23 18:22:42 2014 lennuy_f
+** Last update Sat May 24 17:15:57 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -45,11 +45,26 @@ char	**my_cd_tiray(char *dir, char **env)
   return (env);
 }
 
-void	my_cd_error(char **param)
+void	my_cd_error(char **param, int x)
 {
-  my_putstr("my_sh: cd: ", 2);
+  my_putstr("42sh: cd: ", 2);
+  if (x == 1)
+    my_putstr("~/", 1);
   my_putstr(param[1], 2);
   my_putstr(": No such file or directory\n", 2);
+}
+
+char	**my_cd_homer(char *dir, char **env, char **param, char *buff)
+{
+  env = my_setenv(env, "OLDPWD", my_find(env, 0, "PWD"));
+  dir = my_find(env, 0, "HOME");
+  chdir(dir);
+  param[1] += 2;
+  if (chdir(param[1]) != -1)
+    env = my_setenv(env, "PWD", getcwd(buff, 4096));
+  else
+    my_cd_error(param, 1);
+  return (env);
 }
 
 char	**my_cd(char **param, char **env)
@@ -66,6 +81,8 @@ char	**my_cd(char **param, char **env)
       chdir(dir);
       env = my_setenv(env, "PWD", dir);
     }
+  else if (my_strncmp(param[1], "~/", 2) == 0)
+    env = my_cd_homer(dir, env, param, buff);
   else if (my_strcmp(param[1], "-") == 0)
     env = my_cd_tiray(dir, env);
   else if (chdir(param[1]) != -1)
@@ -74,6 +91,6 @@ char	**my_cd(char **param, char **env)
       env = my_setenv(env, "PWD", getcwd(buff, 4096));
     }
   else
-    my_cd_error(param);
+    my_cd_error(param, 0);
   return (env);
 }

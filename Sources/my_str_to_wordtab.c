@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:17:34 2014 Zackary Beaugelin
-** Last update Wed May 21 16:09:10 2014 jussea_m@epitech.eu
+** Last update Sat May 24 22:03:56 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -19,7 +19,7 @@ int	my_countword(char *str, char sep)
   m = 2;
   while (str && str[i] != '\0' && str[i] != '\n')
     {
-      if (str[i] == sep)
+      if (str[i] && str[i] == sep)
 	m++;
       i++;
     }
@@ -30,7 +30,7 @@ int	my_countchar(char *str, char sep)
   int	c;
 
   c = 0;
-  while (str && str[c] != sep && str[c] != '\0' && str[c] != '\n')
+  while (str[c] != sep && str[c] && str[c] != '\n')
     c = c + 1;
   c = c + 1;
   return (c);
@@ -58,13 +58,15 @@ char	**my_str_to_wordtab(char *str, char sep, int a, int b)
   int	i;
   char	**tab;
 
+  if (!str)
+    return (NULL);
   i = check_sep(str, 0, sep);
   tab = xmalloc(sizeof(char *) * (my_countword(str, sep)));
   while (str && str[i] != '\n' && str[i] != '\0')
     {
       if (str[i] == sep || str[i] == '\n')
 	{
-	  while (str[i] == sep)
+	  while (str[i] && str[i] == sep)
 	    i++;
 	  a++;
 	  b = 0;
@@ -74,8 +76,6 @@ char	**my_str_to_wordtab(char *str, char sep, int a, int b)
 	tab[a][b++] = str[i++];
       tab[a][b] = '\0';
     }
-  if (!str)
-    return (NULL);
   tab[a + 1] = NULL;
   return (tab);
 }
