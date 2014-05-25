@@ -5,7 +5,7 @@
 ** Login   <sanche_c@epitech.net>
 ** 
 ** Started on  Sat May 24 17:32:21 2014 Cedric Sanchez
-** Last update Sun May 25 16:05:10 2014 Cedric Sanchez
+** Last update Sun May 25 16:34:10 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
@@ -44,10 +44,10 @@ void    my_putstrecho(char *str, int check)
   i = 0;
   while (str[i])
     {
+      while (str[i] == '"')
+	i++;
       if (check >= 1 && str[i] == '\\')
 	{
-	  while (str[i] == '\\' && str[i + 1] == '\\')
-	    i++;
 	  putspecchar(str[i + 1]);
           i++;
 	}
@@ -119,7 +119,7 @@ int	my_echo(char **tab)
     {
       while (tab[x])
 	{
-	  my_putstrecho(tab[x], 1);
+	  my_putstrecho(tab[x], 0);
 	  if (tab[x + 1] != NULL)
 	    my_putchar(' ');
 	  x++;
