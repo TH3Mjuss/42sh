@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Sun May 25 15:59:12 2014 jussea_m@epitech.eu
+** Last update Sun May 25 21:09:07 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -116,7 +116,6 @@ int		my_dlr(char **param, char **param2, char **env)
   t_redir	r;
 
   r.file = open(tmp, O_WRONLY | O_TRUNC | O_CREAT, 0660);
-  //  buff = "\0";
   if (param2)
     {
       prompt_dlr(&r, buff, param2[0]);
