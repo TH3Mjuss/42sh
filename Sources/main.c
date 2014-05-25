@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sat May 24 19:57:16 2014 Zackary Beaugelin
+** Last update Sun May 25 17:12:17 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
@@ -76,6 +76,8 @@ int	main(int ac, char **av, char **env)
   int	i;
   char	*buffer;
 
+  write(1, "\e[36m\nWELCOME TO QUADRISHELL\n", 30);
+  write(1, "\e[0m", 6);
   init_minishell(ac, av, env);
   g_test = 1;
   while (g_test == 1)
