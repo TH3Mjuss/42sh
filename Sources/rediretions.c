@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Sun May 25 21:09:07 2014 jussea_m@epitech.eu
+** Last update Sun May 25 21:46:59 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -114,8 +114,18 @@ int		my_dlr(char **param, char **param2, char **env)
   char		*file[] = {tmp, NULL};
   char		buff[4096];
   t_redir	r;
+  int		i;
 
+  i = -1;
+  r.file = 0;
   r.file = open(tmp, O_WRONLY | O_TRUNC | O_CREAT, 0660);
+  while (++i < 4096)
+    buff[i] = 0;
+  if (r.file == -1)
+    {
+      my_putstr("Cant't use file\n", 2);
+      return (1);
+    }
   if (param2)
     {
       prompt_dlr(&r, buff, param2[0]);
