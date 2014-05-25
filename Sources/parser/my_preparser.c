@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-** Last update Sun May 25 21:04:47 2014 Zackary Beaugelin
+** Last update Sun May 25 21:46:40 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -60,5 +60,7 @@ int		my_preparser(char **cmd, char **tok, char **env)
 	       my_str_to_wordtab(cmd[p.j + 1], ' ', 0, 0), env);
       else
 	ret = my_preparser2(cmd, tok, env, &p);
+  else if (tok && !*cmd)
+    my_put_tok_err(tok[p->i]);
   return (ret);
 }
