@@ -5,11 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-<<<<<<< HEAD
-** Last update Sat May 24 19:26:11 2014 jussea_m@epitech.eu
-=======
-** Last update Sun May 25 12:36:08 2014 Zackary Beaugelin
->>>>>>> 4405311b92607c9416d941b425e7949659f5b132
+** Last update Sun May 25 21:04:47 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -28,7 +24,7 @@ int	my_preparser2(char **cmd, char **tok, char **env, t_parse *p)
   if (!my_strcmp(tok[p->i], "<"))
     my_lr(my_str_to_wordtab(my_epur_str(cmd[p->j]), ' ', 0, 0),
 	  my_str_to_wordtab(cmd[p->j + 1], ' ', 0, 0), env);
-  if (!my_strcmp(tok[p->i], "<<"))
+  else if (!my_strcmp(tok[p->i], "<<"))
     my_dlr(my_str_to_wordtab(my_epur_str(cmd[p->j]), ' ', 0, 0),
 	   my_str_to_wordtab(cmd[p->j + 1], ' ', 0, 0), env);
   else if (!tok[p->i])
