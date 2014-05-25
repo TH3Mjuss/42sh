@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:10:41 2014 Zackary Beaugelin
-** Last update Sat May 24 17:15:57 2014 lennuy_f
+** Last update Sun May 25 21:51:33 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -34,7 +34,7 @@ char	**my_cd_tiray(char *dir, char **env)
 {
   if (!(dir = my_find(env, 0, "OLDPWD")))
     {
-      my_putstr("42sh: cd: OLDPWD not set", 2);
+      my_putstr("42sh: cd: OLDPWD not set\n", 2);
       return (env);
     }
   chdir(dir);

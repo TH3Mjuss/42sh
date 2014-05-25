@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sun May 25 17:43:14 2014 Zackary Beaugelin
+** Last update Sun May 25 21:14:26 2014 lennuy_f
 */
 
 #include "my_sh.h"
@@ -16,10 +16,11 @@ int	g_test;
 void		my_prompt()
 {
   char	hostname[1024];
+  char	buff[512];
 
   hostname[1023] = '\0';
   gethostname(hostname, 1023);
-  if (!my_putstr(my_find(g_env, 0, "USER="), 1))
+  if (!my_putstr(getcwd(buff, 512), 1))
     my_putstr("user", 1);
   my_putstr("@", 1);
   my_putstr(hostname, 1);
@@ -99,7 +100,8 @@ int	main(int ac, char **av, char **env)
 	while (++i < 4096)
 	  buffer[i] = 0;
 	xread(0, buffer, 4096);
-	k = my_preparser(cmd_to_tab(buffer, 0, 0), tok_to_tab(buffer, 0, 0), g_env);
+	k = my_preparser(cmd_to_tab(my_epur_str(buffer), 0, 0),
+			 tok_to_tab(buffer, 0, 0), g_env);
       }
   return (k);
 }
