@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-** Last update Sun May 25 21:47:40 2014 Zackary Beaugelin
+** Last update Sun May 25 21:50:08 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -61,6 +61,6 @@ int		my_preparser(char **cmd, char **tok, char **env)
       else
 	ret = my_preparser2(cmd, tok, env, &p);
   else if (tok && !*cmd)
-    my_put_tok_err(tok[p->i + 1]);
+    my_put_tok_err(tok[p.i + 1]);
   return (ret);
 }
