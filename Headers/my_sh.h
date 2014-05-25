@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Fri May 23 19:44:13 2014 Zackary Beaugelin
+** Last update Sat May 24 19:27:34 2014 jussea_m@epitech.eu
 */
 
 #ifndef __MY_SH__
@@ -102,5 +102,6 @@ char	**my_str_to_wordtab(char *str, char sep, int a, int b);
 int     my_drr(char **param, char **param2, char **env);
 int     my_lr(char **param, char **param2, char **env);
 int	my_exit(char **wordtab);
+int     my_dlr(char **param, char **param2, char **env);
 
 #endif /*__MY_SH__*/

@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Fri May 23 19:48:26 2014 Zackary Beaugelin
+** Last update Sun May 25 15:59:12 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -97,3 +97,31 @@ int		my_lr(char **param, char **param2, char **env)
   return (1);
 }
 
+void	prompt_dlr(t_redir *r, char *buff, char *stop)
+{
+  while (my_strncmp(buff, stop, my_strlen(stop)))
+    {
+      my_putstr("> ", 1);
+      xread(0, buff, 4096);
+      if (my_strncmp(buff, stop, my_strlen(stop)))
+	write(r->file, buff, my_strlen(buff));
+    }
+}
+
+int		my_dlr(char **param, char **param2, char **env)
+{
+  char		tmp[] = "/tmp/42sh";
+  char		*file[] = {tmp, NULL};
+  char		buff[4096];
+  t_redir	r;
+
+  r.file = open(tmp, O_WRONLY | O_TRUNC | O_CREAT, 0660);
+  //  buff = "\0";
+  if (param2)
+    {
+      prompt_dlr(&r, buff, param2[0]);
+      my_lr(param, file, env);
+    }
+  close(r.file);
+  return (1);
+}
