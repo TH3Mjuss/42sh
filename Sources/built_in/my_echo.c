@@ -5,7 +5,7 @@
 ** Login   <sanche_c@epitech.net>
 ** 
 ** Started on  Sat May 24 17:32:21 2014 Cedric Sanchez
-** Last update Sun May 25 00:53:01 2014 Zackary Beaugelin
+** Last update Sun May 25 13:28:52 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
@@ -46,6 +46,8 @@ void    my_putstrecho(char *str, int check)
     {
       if (check >= 1 && str[i] == '\\')
 	{
+	  while (str[i] == '\\' && str[i + 1] == '\\')
+	    i++;
 	  putspecchar(str[i + 1]);
           i++;
 	}
@@ -69,7 +71,7 @@ void     checkopt(char **tab, int x)
 
   check = 0;
   y = 0;
-  check = 0;
+  checkn = 0;
   while (tab[x][y])
     {
       if (tab[x][y] == 'e')
@@ -95,8 +97,10 @@ int	checkcmd(char **av, int x)
   while (av[x])
     {
       if (av[x][0] == '-' && av[x + 1][0] != '-' && av[x + 1] != NULL)
-	checkopt(av, x);
-      else  if (av[x][0] == '-' && av[x + 1][0] == '-')
+	{
+	  checkopt(av, x);
+	}
+      else  if (av[x][0] == '-' && av[x + 1] != NULL && av[x + 1][0] == '-')
 	x++;
       else if (av[x][0] == '-' && av[x + 1] == NULL)
 	return (0);
@@ -110,7 +114,10 @@ int	my_echo(char **tab)
   int   x;
 
   x = 1;
-  if (tab[1][0] != '-')
+  if (tab[1] == NULL)
+    my_putchar('\n');
+  else if (tab[1][0] != '-' || (tab[1][0] == '-' &&
+				tab[1][1] == '\0'))
     {
       while (tab[x])
 	{
@@ -119,9 +126,12 @@ int	my_echo(char **tab)
 	    my_putchar(' ');
 	  x++;
 	}
-      return (0);
+      my_putchar('\n');
     }
   else
-    checkcmd(tab, x);
+    {
+      if (tab[x + 1] != NULL)
+	checkcmd(tab, x);
+    }
   return (0);
 }
