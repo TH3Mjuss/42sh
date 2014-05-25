@@ -5,15 +5,15 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:12:26 2014 Zackary Beaugelin
-** Last update Mon Apr  7 20:12:27 2014 Zackary Beaugelin
+** Last update Sun May 25 17:04:47 2014 Cedric Sanchez
 */
 
 #include "my_sh.h"
 
 int	my_help()
 {
-  write(1, "HELP of minishell1 by Gysc0 (beauge_z)\n", 39);
-  write(1, "Version 0.1.2\n", 14);
+  write(1, "HELP of 42sh made by beauge_z sanche_c jussea_m lennuy_f\n", 57);
+  write(1, "Version 42.1337\n", 15);
   write(1, "Features supported :\n", 21);
   write(1, "\t- all functions;\n", 18);
   write(1, "\t- built-in:\n", 13);
@@ -21,7 +21,9 @@ int	my_help()
   write(1, "\t  - env;\n", 10);
   write(1, "\t  - setenv;\n", 13);
   write(1, "\t  - unsetenv;\n", 15);
-  write(1, "\t  - exit\n", 10);
+  write(1, "\t  - exit;\n", 11);
+  write(1, "\t  - echo;\n", 12);
+  write(1, "\t- > < >> <<\n", 13);
   write(1, "--END OF HELP--\n", 16);
   return (1);
 }
