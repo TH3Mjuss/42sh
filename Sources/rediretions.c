@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Sun May 25 21:42:25 2014 jussea_m@epitech.eu
+** Last update Sun May 25 21:46:59 2014 jussea_m@epitech.eu
 */
 
 #include "my_sh.h"
@@ -101,7 +101,6 @@ void	prompt_dlr(t_redir *r, char *buff, char *stop)
 {
   while (my_strncmp(buff, stop, my_strlen(stop)))
     {
-      printf("PROMPT\n");
       my_putstr("> ", 1);
       xread(0, buff, 4096);
       if (my_strncmp(buff, stop, my_strlen(stop)))
