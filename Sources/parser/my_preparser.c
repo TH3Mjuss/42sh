@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Tue May 13 19:39:15 2014 Zackary Beaugelin
-** Last update Sat May 24 22:11:45 2014 Zackary Beaugelin
+** Last update Sun May 25 01:32:58 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -47,7 +47,8 @@ int		my_preparser(char **cmd, char **tok, char **env)
       if (!my_strcmp(tok[p.i], "&&") || !my_strcmp(tok[p.i], ";"))
 	{
 	  ret = my_parser(my_str_to_wordtab(my_epur_str(cmd[p.j]), ' ', 0, 0), 1, env);
-	  ret = my_parser(my_str_to_wordtab(my_epur_str(cmd[p.j + 1]), ' ', 0, 0), 1, env);
+	  if (!tok[p.i + 1])
+	    ret = my_parser(my_str_to_wordtab(my_epur_str(cmd[p.j + 1]), ' ', 0, 0), 1, env);
 	}
       else if (!my_strcmp(tok[p.i], ">"))
 	my_rr(my_str_to_wordtab(my_epur_str(cmd[p.j]), ' ', 0, 0),

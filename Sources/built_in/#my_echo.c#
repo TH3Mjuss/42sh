@@ -5,7 +5,7 @@
 ** Login   <sanche_c@epitech.net>
 ** 
 ** Started on  Sat May 24 17:32:21 2014 Cedric Sanchez
-** Last update Sun May 25 00:22:01 2014 Cedric Sanchez
+** Last update Sun May 25 00:53:01 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -102,7 +102,7 @@ int	checkcmd(char **av, int x)
 	return (0);
       x++;
     }
-
+  return (1);
 }
 
 int	my_echo(char **tab)

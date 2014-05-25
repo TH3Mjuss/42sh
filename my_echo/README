@@ -1,3 +1,0 @@
-#FRANCE
-Le fichier echo.h contient les prototypes des fonctions à mettre dans le .h du 42sh
-PENSEZ À VÉRIFIER QU'IL NE RESTE PAS DE TRACES DE MON ANCIEN ECHO DANS LE .h OU DANS LES BUILT_INS

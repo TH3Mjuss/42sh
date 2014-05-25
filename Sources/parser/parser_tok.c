@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Sat May 24 22:03:06 2014 Zackary Beaugelin
+** Last update Sun May 25 01:10:06 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -23,7 +23,7 @@ int	my_counttok(char *str)
         nb_cmd++;
       i++;
     }
-  return (i);
+  return (nb_cmd);
 }
 
 int	my_count_ctok(char *str)

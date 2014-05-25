@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Fri May 23 19:44:13 2014 Zackary Beaugelin
+** Last update Sun May 25 00:48:02 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -74,13 +74,11 @@ void	my_signal(int sig);
 char	**my_setenv(char **cp_env, char *name, char *var);
 char	**my_unsetenv(char *name, char **environ);
 void	xread(int fd, char *str, int lenght);
-void	my_echo(char **tab);
-char	*inittab();
-int	testopt(char **tab, int x);
-int	checkslash(char *tab, char *tab2, char *str, int i);
-int	eoption(char *str);
-int	checkopt(char **tab, int y, int x);
-char	*inittab2();
+int	my_echo(char **tab);
+int	checkcmd(char **tab, int x);
+void	my_putstrecho(char *str, int check);
+void	checkopt(char **tab, int x);
+void	putspecchar(char c);
 char	**cmd_to_tab(char *str, int j, int k);
 int	check_tok(char *str, int i);
 int	my_countc(char *str);

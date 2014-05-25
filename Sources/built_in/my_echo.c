@@ -1,120 +1,127 @@
 /*
-** my_echo.c for my_echo in /home/Galendder/42sh/42sh
+** my_echo.c for my_echo.c in /home/Galendder/rendu/42sh/my_echo
 ** 
 ** Made by Cedric Sanchez
 ** Login   <sanche_c@epitech.net>
 ** 
-** Started on  Tue May  6 15:31:46 2014 Cedric Sanchez
-** Last update Fri May 23 18:46:27 2014 lennuy_f
+** Started on  Sat May 24 17:32:21 2014 Cedric Sanchez
+** Last update Sun May 25 00:53:01 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
 
-char	*inittab()
+void    putspecchar(char c)
 {
-  char	*tab;
-
-  tab = xmalloc(sizeof(char) * 11);
-  tab[0] = '\\';
-  tab[1] = 'a';
-  tab[2] = 'b';
-  tab[3] = 'c';
-  tab[4] = 'e';
-  tab[5] = 'f';
-  tab[6] = 'n';
-  tab[7] = 'r';
-  tab[8] = 't';
-  tab[9] = 'v';
-  tab[10] = '\0';
-  return (tab);
-}
-
-void	my_echo(char **tab)
-{
-  int	check;
-
-  check = 1;
-  if (tab[2] == NULL || tab[1][0] != '-')
-    {
-      my_putstr(tab[1], 1);
-      my_putchar(' ');
-    }
-  else
-    check = testopt(tab, 2);
-  if (check == 1)
+  if (c == 'a')
+    my_putchar('\a');
+  else if (c == '\\')
+    my_putchar('\\');
+  else if (c == 'b')
+    my_putchar('\b');
+  else if (c == 'e')
+    my_putchar('\e');
+  else if (c == 'f')
+    my_putchar('\f');
+  else if (c == 'n')
     my_putchar('\n');
-}
-
-int	testopt(char **tab, int x)
-{
-  int	check;
-  int	check2;
-
-  check = 0;
-  check2 = 0;
-  while (tab[x])
-    {
-      if (tab[1][0] == '-')
-	{
-	  check = checkopt(tab, 1, x);
-	}
-      else
-	my_putstr(tab[x], 1);
-      if (tab[x + 1])
-	my_putchar(' ');
-      x++;
-    }
-  if (check2 == 0 && check == 0)
-    return (1);
+  else if (c == 'r')
+    my_putchar('\r');
+  else if (c == 't')
+    my_putchar('\t');
+  else if (c == 'v')
+    my_putchar('\v');
   else
-    return (0);
-}
-
-int	checkslash(char *tab, char *tab2, char *str, int i)
-{
-  int	j;
-
-  j = 0;
-  while (tab[j] != str[i] && tab[j] != '\0')
     {
-      if (tab[j] == str[i])
-	{
-	  if (j == 3)
-	    return (1);
-	  else
-	    {
-	      my_putchar(tab2[j]);
-	    }
-	}
-      j++;
+      my_putchar('\\');
+      my_putchar(c);
     }
-  return (0);
 }
 
-int	eoption(char *str)
+void    my_putstrecho(char *str, int check)
 {
-  int	i;
-  char *tab;
-  int	check2;
-  char	*tab2;
+  int   i;
 
-  check2 = 0;
   i = 0;
   while (str[i])
     {
-      if (str[i] == '\\')
+      if (check >= 1 && str[i] == '\\')
 	{
-	  tab = inittab();
-	  tab2 = inittab2();
-	  check2 = checkslash(tab, tab2, str, i);
-	  free(tab);
-	  free(tab2);
+	  putspecchar(str[i + 1]);
+          i++;
+	}
+      else if (check <= 0 && str[i] == '\\')
+	{
+	  my_putchar('\\');
+	  my_putchar(str[i + 1]);
+	  i++;
 	}
       else
 	my_putchar(str[i]);
       i++;
-      if (str[i - 1] == '\\')
-	i++;
     }
-  return (check2);
+}
+
+void     checkopt(char **tab, int x)
+{
+  int   y;
+  int   check;
+  int	checkn;
+
+  check = 0;
+  y = 0;
+  check = 0;
+  while (tab[x][y])
+    {
+      if (tab[x][y] == 'e')
+	check++;
+      else if (tab[x][y] == 'E')
+	check = check - 1;
+      else if (tab[x][y] == 'n')
+	checkn = 1;
+      y++;
+    }
+  x++;
+  while (tab[x])
+    {
+      my_putstrecho(tab[x], check);
+      x++;
+    }
+  if (checkn != 1)
+    my_putchar('\n');
+}
+
+int	checkcmd(char **av, int x)
+{
+  while (av[x])
+    {
+      if (av[x][0] == '-' && av[x + 1][0] != '-' && av[x + 1] != NULL)
+	checkopt(av, x);
+      else  if (av[x][0] == '-' && av[x + 1][0] == '-')
+	x++;
+      else if (av[x][0] == '-' && av[x + 1] == NULL)
+	return (0);
+      x++;
+    }
+  return (1);
+}
+
+int	my_echo(char **tab)
+{
+  int   x;
+
+  x = 1;
+  if (tab[1][0] != '-')
+    {
+      while (tab[x])
+	{
+	  my_putstrecho(tab[x], 1);
+	  if (tab[x + 1] != NULL)
+	    my_putchar(' ');
+	  x++;
+	}
+      return (0);
+    }
+  else
+    checkcmd(tab, x);
+  return (0);
 }
