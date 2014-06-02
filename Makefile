@@ -5,7 +5,7 @@
 ## Login   <beauge_z@epitech.net>
 ##
 ## Started on  Mon Apr  7 20:08:22 2014 Zackary Beaugelin
-## Last update Sun May 25 21:25:17 2014 lennuy_f
+## Last update Mon Jun  2 07:42:54 2014 Zackary Beaugelin
 ##
 
 NAME	=	42sh
@@ -49,7 +49,8 @@ SRCS	=	$(SRCDIR)/main.c \
 		$(PDIR)/parser_tok.c \
 		$(FDIR)/xread.c \
 		$(SRCDIR)/rediretions.c \
-		$(SRCDIR)/my_epur_str.c
+		$(SRCDIR)/my_epur_str.c \
+		$(SRCDIR)/my_check_env.c
 
 OBJS	=	$(SRCS:.c=.o)
 

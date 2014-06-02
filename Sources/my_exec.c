@@ -5,12 +5,18 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Sun May 25 22:26:51 2014 Zackary Beaugelin
+** Last update Mon Jun  2 13:52:09 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
 
 int	g_check;
+
+void	sig_handler(int sig)
+{
+  if (sig == SIGSEGV)
+    my_putstr("QuadriSH: Segmentation fault (core dumped)\n", 2);
+}
 
 void	my_exec_bis(t_exec *e, char *path, char **param, char **env)
 {
@@ -18,53 +24,65 @@ void	my_exec_bis(t_exec *e, char *path, char **param, char **env)
   if (e->pid < 0)
     return ;
   if (e->pid == 0)
-    execve(path, param, env);
+      execve(path, param, env);
   else
-    waitpid(e->pid, &e->status, 0);
+    {
+      signal(SIGSEGV, sig_handler);
+      waitpid(e->pid, &e->status, 0);
+    }
   g_check = 0;
 }
 
-void		my_exec(char **bin, char **param, char **env, int k)
+int		my_exec(char **bin, char **param, char **env, int k)
 {
   t_exec	e;
 
-  if (bin[k + 1] == NULL)
-    e.path = my_strcat("\0", "./");
-  else
-    e.path = my_strcat(bin[k], "/");
-  e.path = my_strcat(e.path, param[0]);
-  if (access(e.path, X_OK) == -1 && !(bin[k + 1]) && g_check)
-    {
-      my_putstr(param[0], 2);
-      my_putstr(": command not found\n", 2);
-      return ;
-    }
-  else if (!access(e.path, X_OK) && g_check)
-    my_exec_bis(&e, e.path, param, env);
-  else if (!access(param[0], X_OK) && g_check)
+  if (!access(param[0], X_OK) && g_check)
     my_exec_bis(&e, param[0], param, env);
+  if (bin)
+    {
+      if (bin[k + 1] == NULL)
+	e.path = my_strcat("\0", "./");
+      else
+	e.path = my_strcat(bin[k], "/");
+      e.path = my_strcat(e.path, param[0]);
+      if (access(e.path, X_OK) == -1 && !(bin[k + 1]) && g_check)
+	{
+	  my_putstr(param[0], 2);
+	  my_putstr(": command not found\n", 2);
+	  return (0);
+	}
+      else if (!access(e.path, X_OK) && g_check)
+	{
+	  my_exec_bis(&e, e.path, param, env);
+	  return (e.status);
+	}
+   }
+  return (1);
 }
 
 int	my_execve(char **param, char **env)
 {
   char	**bin;
   int	k;
+  int	ret;
 
   k = 0;
+  ret = 1;
   bin = my_str_to_wordtab(my_find(env, 0, "PATH"), ':', 0, 0);
   g_check = 1;
-  if (!bin)
+  if (!bin && access(param[0], X_OK))
     {
       if (!param[0])
-	return (1);
+	return (0);
       my_putstr(param[0], 2);
       my_putstr(": command not found\n", 2);
-      return (-1);
+      return (0);
     }
-  while (bin[k])
+  while ((bin || !access(param[0], X_OK)) && g_check && ret)
     {
-      my_exec(bin, param, env, k);
+      ret = my_exec(bin, param, env, k);
       k++;
     }
-  return (1);
+  return (ret);
 }

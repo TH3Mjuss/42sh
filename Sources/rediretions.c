@@ -1,11 +1,11 @@
 /*
-** test.c for test in /home/jussea_m
+** rediretions.c for 42sh in /home/jussea_m/rendu/my_42
 **
 ** Made by jussea_m@epitech.eu
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Sun May 25 21:46:59 2014 jussea_m@epitech.eu
+** Last update Mon Jun  2 13:56:25 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -99,9 +99,14 @@ int		my_lr(char **param, char **param2, char **env)
 
 void	prompt_dlr(t_redir *r, char *buff, char *stop)
 {
+  int	i;
+
   while (my_strncmp(buff, stop, my_strlen(stop)))
     {
+      i = -1;
       my_putstr("> ", 1);
+      while (++i < 4096)
+	buff[i] = 0;
       xread(0, buff, 4096);
       if (my_strncmp(buff, stop, my_strlen(stop)))
 	write(r->file, buff, my_strlen(buff));
@@ -129,8 +134,8 @@ int		my_dlr(char **param, char **param2, char **env)
   if (param2)
     {
       prompt_dlr(&r, buff, param2[0]);
+      close(r.file);
       my_lr(param, file, env);
     }
-  close(r.file);
   return (1);
 }

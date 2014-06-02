@@ -5,11 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-<<<<<<< HEAD
-** Last update Sun May 25 16:08:30 2014 jussea_m@epitech.eu
-=======
-** Last update Sun May 25 00:48:02 2014 Zackary Beaugelin
->>>>>>> 4405311b92607c9416d941b425e7949659f5b132
+** Last update Mon Jun  2 14:16:19 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -24,6 +20,9 @@
 #  include <signal.h>
 #  include <fcntl.h>
 #  include <stdio.h>
+#  include <pwd.h>
+
+#   define CMD(cmd)	my_epur_str(cmd), ' ', 0, 0
 
 typedef struct	s_mysh
 {
@@ -46,12 +45,21 @@ typedef struct	s_parse
   int	j;
 }		t_parse;
 
+
 typedef struct	s_redir
 {
   int		file;
   int		pid;
   int		status;
 }		t_redir;
+
+typedef struct	s_pip
+{
+  int		ret;
+  int		fd;
+  int		pid;
+  int		tmp;
+}		t_pip;
 
 int	main(int ac, char **av, char **env);
 int	my_execve(char **param, char **env);
@@ -92,7 +100,6 @@ int	my_counttok(char *str);
 int	my_count_ctok(char *str);
 int	check_not_tok(char *str, int i);
 char	**tok_to_tab(char *str, int j, int k);
-char	*my_setop(char *pwd, const char *point);
 int	my_preparser(char **cmd, char **tok, char **env);
 int	my_parser(char **wordtab, int i, char **env);
 int	my_rr(char **param, char **param2, char **env);
@@ -106,5 +113,6 @@ int     my_lr(char **param, char **param2, char **env);
 int	my_exit(char **wordtab);
 void    prompt_dlr(t_redir *r, char *buff, char *stop);
 int     my_dlr(char **param, char **param2, char **env);
+int	my_check_env(char **n_env, char **o_env);
 
 #endif /*__MY_SH__*/

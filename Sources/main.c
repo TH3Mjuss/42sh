@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:09:17 2014 Zackary Beaugelin
-** Last update Sun May 25 22:41:29 2014 Zackary Beaugelin
+** Last update Mon Jun  2 12:25:30 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -15,23 +15,22 @@ int	g_test;
 
 void		my_prompt()
 {
-  char	hostname[1024];
-  char	buff[512];
+  struct passwd	*pw;
+  char		buff[512];
 
-  hostname[1023] = '\0';
-  gethostname(hostname, 1023);
-  if (!my_putstr(my_find(g_env, 0, "USER="), 1))
-    my_putstr("user", 1);
-  my_putstr("@", 1);
-  my_putstr(hostname, 1);
-  my_putstr(" \e[32m", 1);
+  pw = getpwuid(1000);
+  my_putstr(pw->pw_name, 1);
+  my_putstr("@quadriSH:", 1);
+  my_putstr("\e[32m", 1);
   my_putstr(getcwd(buff, 512), 1);
   my_putstr("\e[0m> ", 1);
 }
 
 void	init_minishell(int ac, char **av, char **cp_env)
 {
-  system("clear");
+  char	*clear[] = {"/usr/bin/clear", NULL};
+
+  my_execve(clear, cp_env);
   my_putstr("\e[36m", 1);
   my_putstr("    _____                 _      _ _____ _   _\n", 1);
   my_putstr("   |  _  |               | |    (_)  ___| | | |\n", 1);
@@ -78,6 +77,9 @@ int	my_parser(char **wordtab, int i, char **env)
     }
   else
     i = my_execve(wordtab, g_env);
+  if (!my_strcmp(wordtab[0], "unsetenv") || !my_strcmp(wordtab[0], "setenv")
+      || !my_strcmp(wordtab[0], "cd"))
+    i = my_check_env(g_env, env);
   return (i);
 }
 
