@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Sun May 11 17:51:56 2014 Zackary Beaugelin
-** Last update Sun May 25 01:10:06 2014 Zackary Beaugelin
+** Last update Mon Jun  2 16:24:01 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -65,6 +65,6 @@ char	**tok_to_tab(char *str, int j, int k)
 	tab[j][k++] = str[i++];
       tab[j][k] = '\0';
     }
-  tab[j] = NULL;
+  tab[j + 1] = NULL;
   return (tab);
 }

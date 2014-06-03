@@ -5,7 +5,7 @@
 ** Login   <jussea_m@epitech.net>
 **
 ** Started on  Sun May 11 14:12:05 2014 jussea_m@epitech.eu
-** Last update Mon Jun  2 13:56:25 2014 Zackary Beaugelin
+** Last update Mon Jun  2 21:13:23 2014 Gysc0
 */
 
 #include "my_sh.h"
@@ -34,9 +34,8 @@ int	my_rr(char **param, char **param2, char **env)
 	  waitpid(r.pid, &r.status, 0);
 	  close(r.file);
 	}
-      return (1);
     }
-  return (1);
+  return (r.status);
 }
 
 int		my_drr(char **param, char **param2, char **env)
@@ -63,9 +62,8 @@ int		my_drr(char **param, char **param2, char **env)
 	  waitpid(r.pid, &r.status, 0);
 	  close(r.file);
 	}
-      return (1);
     }
-  return (1);
+  return (r.status);
 }
 
 int		my_lr(char **param, char **param2, char **env)
@@ -92,9 +90,8 @@ int		my_lr(char **param, char **param2, char **env)
 	  waitpid(r.pid, &r.status, 0);
 	  close(r.file);
 	}
-      return (1);
     }
-  return (1);
+  return (r.status);
 }
 
 void	prompt_dlr(t_redir *r, char *buff, char *stop)
@@ -135,7 +132,7 @@ int		my_dlr(char **param, char **param2, char **env)
     {
       prompt_dlr(&r, buff, param2[0]);
       close(r.file);
-      my_lr(param, file, env);
+      i = my_lr(param, file, env);
     }
-  return (1);
+  return (i);
 }

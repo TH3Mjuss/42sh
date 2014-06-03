@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:11:24 2014 Zackary Beaugelin
-** Last update Mon Jun  2 13:52:09 2014 Zackary Beaugelin
+** Last update Mon Jun  2 21:00:59 2014 Zackary Beaugelin
 */
 
 #include "my_sh.h"
@@ -41,10 +41,10 @@ int		my_exec(char **bin, char **param, char **env, int k)
     my_exec_bis(&e, param[0], param, env);
   if (bin)
     {
-      if (bin[k + 1] == NULL)
-	e.path = my_strcat("\0", "./");
-      else
+      if (bin[k])
 	e.path = my_strcat(bin[k], "/");
+      else if (!bin[k])
+	e.path = my_strcat("\0", "./");
       e.path = my_strcat(e.path, param[0]);
       if (access(e.path, X_OK) == -1 && !(bin[k + 1]) && g_check)
 	{

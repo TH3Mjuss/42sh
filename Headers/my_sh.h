@@ -5,7 +5,7 @@
 ** Login   <beauge_z@epitech.net>
 **
 ** Started on  Mon Apr  7 20:14:03 2014 Zackary Beaugelin
-** Last update Mon Jun  2 14:16:19 2014 Zackary Beaugelin
+** Last update Tue Jun  3 01:57:10 2014 Zackary Beaugelin
 */
 
 #ifndef __MY_SH__
@@ -41,8 +41,9 @@ typedef struct	s_exec
 
 typedef struct	s_parse
 {
-  int	i;
-  int	j;
+  int		i;
+  int		j;
+  int		ret;
 }		t_parse;
 
 
@@ -56,7 +57,7 @@ typedef struct	s_redir
 typedef struct	s_pip
 {
   int		ret;
-  int		fd;
+  int		fd[2];
   int		pid;
   int		tmp;
 }		t_pip;
@@ -114,5 +115,6 @@ int	my_exit(char **wordtab);
 void    prompt_dlr(t_redir *r, char *buff, char *stop);
 int     my_dlr(char **param, char **param2, char **env);
 int	my_check_env(char **n_env, char **o_env);
+int	my_pipe(char **cmd, char **env);
 
 #endif /*__MY_SH__*/
